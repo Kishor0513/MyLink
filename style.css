@@ -54,6 +54,6 @@ footer a:visited {
     width: 36%;
     height: 36%;
     border-radius: 50%;
-    background: url(/photo/img.png) no-repeat center;
-    background-size: cover;
+    /* background: url(/photo/img.png) no-repeat center;
+    background-size: cover; */
 }
