@@ -1,7 +1,7 @@
 // Display the QR code image
 const qrContainer = document.querySelector("#qr");
 const qrImage = document.createElement("img");
-qrImage.src = "Photo/qr-code.webp";
+qrImage.src = "Photo/kishor0513.svg";
 qrImage.alt = "QR Code - Scan for Surprise";
 qrImage.style.width = "250px";
 qrImage.style.height = "250px";
