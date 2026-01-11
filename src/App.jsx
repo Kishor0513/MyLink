@@ -241,7 +241,7 @@ function App() {
                                 <div className="flex justify-center gap-6 md:justify-start">
                                     <a href="#" className="flex items-center justify-center w-14 h-14 rounded-full glass-panel hover:bg-white hover:text-black transition-all transform hover:scale-110"><Github size={24} /></a>
                                     <a href="#" className="flex items-center justify-center w-14 h-14 rounded-full glass-panel hover:bg-white hover:text-black transition-all transform hover:scale-110"><Linkedin size={24} /></a>
-                                    <a href="mailto:contact@kishorchaudhary.com.np" className="flex items-center justify-center w-14 h-14 rounded-full glass-panel hover:bg-white hover:text-black transition-all transform hover:scale-110"><Mail size={24} /></a>
+                                    <a href="mailto:kishorc2000@gmail.com" className="flex items-center justify-center w-14 h-14 rounded-full glass-panel hover:bg-white hover:text-black transition-all transform hover:scale-110"><Mail size={24} /></a>
                                 </div>
                             </div>
 
@@ -253,8 +253,9 @@ function App() {
                                     onSubmit={(e) => {
                                         e.preventDefault();
                                         const name = e.target.elements.name.value;
+                                        const email = e.target.elements.email.value;
                                         const message = e.target.elements.message.value;
-                                        window.location.href = `mailto:contact@kishorchaudhary.com.np?subject=Portfolio Contact from ${name}&body=${message}`;
+                                        window.location.href = `mailto:kishorc2000@gmail.com?subject=Portfolio Contact from ${name}&body=From: ${name}%0AEmail: ${email}%0A%0AMessage:%0A${message}`;
                                     }}
                                     className="space-y-4"
                                 >
@@ -265,24 +266,34 @@ function App() {
                                             name="name"
                                             required
                                             className="w-full px-4 py-3 text-white transition-colors rounded-xl bg-white/5 border border-white/10 focus:outline-none focus:border-primary/50 placeholder-gray-500"
-                                            placeholder="John Doe"
+                                            placeholder="What's your good name?"
                                         />
                                     </div>
                                     <div>
-                                        <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-400">Message</label>
+                                        <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-400">Your Email</label>
+                                        <input
+                                            type="email"
+                                            name="email"
+                                            required
+                                            className="w-full px-4 py-3 text-white transition-colors rounded-xl bg-white/5 border border-white/10 focus:outline-none focus:border-primary/50 placeholder-gray-500"
+                                            placeholder="What's your email address?"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-400">Your Message</label>
                                         <textarea
                                             name="message"
                                             required
                                             rows="4"
                                             className="w-full px-4 py-3 text-white transition-colors resize-none rounded-xl bg-white/5 border border-white/10 focus:outline-none focus:border-primary/50 placeholder-gray-500"
-                                            placeholder="Hi, I have a project in mind..."
+                                            placeholder="How can I help you?"
                                         />
                                     </div>
                                     <button
                                         type="submit"
                                         className="w-full py-4 font-bold text-white transition-transform rounded-xl bg-gradient-to-r from-primary to-secondary shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98]"
                                     >
-                                        Send Message
+                                        SEND MESSAGE
                                     </button>
                                 </form>
                             </div>

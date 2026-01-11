@@ -83,7 +83,7 @@ This portfolio combines modern web technologies with artistic 3D design to creat
 ## 📧 Contact
 
 - **Website**: [kishorchaudhary.com.np](https://www.kishorchaudhary.com.np)
-- **Email**: contact@kishorchaudhary.com.np
+- **Email**: kishorc2000@gmail.com
 - **GitHub**: [@Kishor0513](https://github.com/Kishor0513)
 
 ## 📄 License
