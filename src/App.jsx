@@ -7,7 +7,7 @@ import Sidebar from './components/ui/Sidebar';
 import Timeline from './components/ui/Timeline';
 import Reviews from './components/ui/Reviews';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Github, Linkedin, Mail, Cpu, Code2, Globe, Server, ExternalLink, Smartphone, MessageSquare, Briefcase, GraduationCap, ArrowRight } from 'lucide-react';
+import { Github, Linkedin, Mail, Cpu, Code2, Globe, Server, ExternalLink, Smartphone, MessageSquare, Briefcase, GraduationCap, ArrowRight, Instagram } from 'lucide-react';
 
 function App() {
     const [isQRModalOpen, setIsQRModalOpen] = useState(false);
