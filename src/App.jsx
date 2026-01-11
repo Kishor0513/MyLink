@@ -56,10 +56,10 @@ function App() {
                                 </span>
                             </h1>
                             <h2 className="text-2xl md:text-3xl text-gray-300 mb-8 font-light">
-                                Your <span className="text-primary font-medium">Professional Title</span>
+                                Senior <span className="text-primary font-medium">Full Stack Engineer</span>
                             </h2>
                             <p className="text-lg text-gray-400 mb-10 max-w-lg leading-relaxed">
-                                Share your unique value proposition and how you help your clients or employers here.
+                                Specializing in high-performance web architectures, scalable systems, and immersive 3D digital experiences. Turning complex problems into elegant, user-centric code.
                             </p>
                             <div className="flex flex-wrap gap-5">
                                 <a
@@ -277,17 +277,24 @@ function App() {
                                             </div>
                                         </div>
 
-                                        <div className="flex items-center gap-4">
+                                        <div className="flex flex-col gap-4">
                                             {[
-                                                { icon: <Github size={20} />, href: 'https://github.com/Kishor0513' },
-                                                { icon: <Linkedin size={20} />, href: 'https://linkedin.com/in/kishor-chaudhary' }
+                                                { icon: <Github size={20} />, label: 'GitHub', href: 'https://github.com/Kishor0513' },
+                                                { icon: <Linkedin size={20} />, label: 'LinkedIn', href: 'https://linkedin.com/in/kishor-chaudhary' },
+                                                { icon: <Instagram size={20} />, label: 'Instagram', href: 'https://www.instagram.com/kishor0513/' },
+                                                { icon: <Globe size={20} />, label: 'Linktree', href: 'https://linktr.ee/kishor0513' }
                                             ].map((social, i) => (
                                                 <a
                                                     key={i}
                                                     href={social.href}
-                                                    className="w-12 h-12 rounded-xl glass-panel flex items-center justify-center text-gray-400 hover:text-primary hover:border-primary/50 transition-all"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="flex items-center gap-4 text-gray-400 hover:text-primary transition-all group"
                                                 >
-                                                    {social.icon}
+                                                    <div className="w-10 h-10 rounded-xl glass-panel flex items-center justify-center border border-white/5 group-hover:border-primary/50 transition-all">
+                                                        {social.icon}
+                                                    </div>
+                                                    <span className="font-semibold tracking-wide uppercase text-xs">{social.label}</span>
                                                 </a>
                                             ))}
                                         </div>
