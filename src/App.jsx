@@ -190,22 +190,22 @@ function App() {
                         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                             {[
                                 {
-                                    title: "Weavers",
-                                    desc: "Full-stack e-commerce platform built with PHP & MySQL, featuring responsive design and dynamic product management.",
-                                    link: "https://github.com/Kishor0513/Weavers",
-                                    tags: ["PHP", "MySQL", "E-commerce"]
+                                    title: "E-commerce Platform",
+                                    desc: "A scalable online shopping solution built with modern backend technologies, featuring real-time inventory and secure payments.",
+                                    link: "#",
+                                    tags: ["Scale", "Database", "UX"]
                                 },
                                 {
-                                    title: "Javascripts",
-                                    desc: "Comprehensive collection of JavaScript applications ranging from utility scripts to advanced logic modules.",
-                                    link: "https://github.com/Kishor0513/Javascripts",
-                                    tags: ["JavaScript", "ES6+", "Algorithms"]
+                                    title: "Enterprise Web App",
+                                    desc: "Complex dashboard system for data visualization and management, optimized for performance and team collaboration.",
+                                    link: "#",
+                                    tags: ["Dashboard", "Analytics", "React"]
                                 },
                                 {
-                                    title: "OtpLoginSystem",
-                                    desc: "Secure authentication implementation featuring One-Time Password (OTP) verification logic.",
-                                    link: "https://github.com/Kishor0513/OtpLoginSystem",
-                                    tags: ["Security", "Auth", "Frontend"]
+                                    title: "Security & Auth System",
+                                    desc: "Robust authentication implementation featuring multi-factor security and encrypted session management.",
+                                    link: "#",
+                                    tags: ["Security", "JWT", "IAM"]
                                 }
                             ].map((project, i) => (
                                 <motion.div
@@ -264,10 +264,14 @@ function App() {
                                         Have an idea? I'm open for freelance projects and full-time opportunities.
                                     </p>
 
-                                    <div className="flex flex-col gap-8">
-                                        <div className="space-y-4">
-                                            <h4 className="text-sm font-bold uppercase tracking-widest text-primary/60 ml-1">Connect</h4>
-                                            <div className="flex flex-col gap-4">
+                                    <div className="flex flex-col gap-10">
+                                        <div className="space-y-6">
+                                            <div className="flex flex-col gap-3">
+                                                <h4 className="text-sm font-bold uppercase tracking-[0.3em] text-primary/60 ml-1">Connect With Me</h4>
+                                                <div className="h-0.5 w-12 bg-primary/30 rounded-full ml-1" />
+                                            </div>
+
+                                            <div className="grid sm:grid-cols-1 gap-4">
                                                 {[
                                                     { icon: <Mail size={20} />, label: 'Email', href: 'mailto:kishorc2000@gmail.com', value: 'kishorc2000@gmail.com' },
                                                     { icon: <Github size={20} />, label: 'GitHub', href: 'https://github.com/Kishor0513', value: 'Kishor0513' },
@@ -280,14 +284,14 @@ function App() {
                                                         href={social.href}
                                                         target="_blank"
                                                         rel="noopener noreferrer"
-                                                        className="flex items-center gap-4 text-gray-400 hover:text-primary transition-all group glass-panel p-3 rounded-2xl border border-white/5 hover:border-primary/20"
+                                                        className="flex items-center gap-4 text-gray-400 hover:text-primary transition-all group glass-panel p-4 rounded-3xl border border-white/5 hover:border-primary/20 bg-white/[0.02]"
                                                     >
-                                                        <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center group-hover:bg-primary/20 transition-all">
+                                                        <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center group-hover:bg-primary/20 transition-all text-gray-400 group-hover:text-primary">
                                                             {social.icon}
                                                         </div>
                                                         <div className="flex flex-col">
-                                                            <span className="text-[10px] font-bold uppercase tracking-widest text-gray-500">{social.label}</span>
-                                                            <span className="text-sm font-semibold text-white group-hover:text-primary transition-colors">{social.value}</span>
+                                                            <span className="text-[11px] font-bold uppercase tracking-widest text-gray-500 mb-0.5">{social.label}</span>
+                                                            <span className="text-base font-semibold text-white group-hover:text-primary transition-colors">{social.value}</span>
                                                         </div>
                                                     </a>
                                                 ))}
