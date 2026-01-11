@@ -36,8 +36,8 @@ A modern, interactive portfolio website showcasing my work as a Senior Full Stac
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/Kishor0513/MyLink.git
-cd MyLink
+git clone https://github.com/Kishor0513/My-Portfolio.git
+cd My-Portfolio
 ```
 
 2. Install dependencies:
