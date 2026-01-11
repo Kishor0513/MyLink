@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-dark text-white overflow-x-hidden transition-colors duration-500;
+    background-image: radial-gradient(circle at 50% 0%, #1a0b2e 0%, #0f0518 100%);
+  }
+
+  .glass-card {
+    @apply bg-surface/30 backdrop-blur-md border border-white/10 shadow-xl rounded-2xl;
+  }
+
+  .glass-panel {
+    @apply bg-white/5 backdrop-blur-lg border border-white/10;
+  }
+
+  .text-glow {
+    text-shadow: 0 0 20px rgba(191, 168, 255, 0.5);
+  }
+}
