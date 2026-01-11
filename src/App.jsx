@@ -265,38 +265,33 @@ function App() {
                                     </p>
 
                                     <div className="flex flex-col gap-8">
-                                        <div className="flex items-center gap-6">
-                                            <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary border border-primary/20">
-                                                <Mail size={24} />
+                                        <div className="space-y-4">
+                                            <h4 className="text-sm font-bold uppercase tracking-widest text-primary/60 ml-1">Connect</h4>
+                                            <div className="flex flex-col gap-4">
+                                                {[
+                                                    { icon: <Mail size={20} />, label: 'Email', href: 'mailto:kishorc2000@gmail.com', value: 'kishorc2000@gmail.com' },
+                                                    { icon: <Github size={20} />, label: 'GitHub', href: 'https://github.com/Kishor0513', value: 'Kishor0513' },
+                                                    { icon: <Linkedin size={20} />, label: 'LinkedIn', href: 'https://linkedin.com/in/kishor-chaudhary', value: 'Kishor Chaudhary' },
+                                                    { icon: <Instagram size={20} />, label: 'Instagram', href: 'https://www.instagram.com/kishor0513/', value: '@kishor0513' },
+                                                    { icon: <Globe size={20} />, label: 'Linktree', href: 'https://linktr.ee/kishor0513', value: 'kishor0513' }
+                                                ].map((social, i) => (
+                                                    <a
+                                                        key={i}
+                                                        href={social.href}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="flex items-center gap-4 text-gray-400 hover:text-primary transition-all group glass-panel p-3 rounded-2xl border border-white/5 hover:border-primary/20"
+                                                    >
+                                                        <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center group-hover:bg-primary/20 transition-all">
+                                                            {social.icon}
+                                                        </div>
+                                                        <div className="flex flex-col">
+                                                            <span className="text-[10px] font-bold uppercase tracking-widest text-gray-500">{social.label}</span>
+                                                            <span className="text-sm font-semibold text-white group-hover:text-primary transition-colors">{social.value}</span>
+                                                        </div>
+                                                    </a>
+                                                ))}
                                             </div>
-                                            <div>
-                                                <p className="text-sm text-gray-500 font-mono">Email Me</p>
-                                                <a href="mailto:kishorc2000@gmail.com" className="text-lg font-bold text-white hover:text-primary transition-colors">
-                                                    kishorc2000@gmail.com
-                                                </a>
-                                            </div>
-                                        </div>
-
-                                        <div className="flex flex-col gap-4">
-                                            {[
-                                                { icon: <Github size={20} />, label: 'GitHub', href: 'https://github.com/Kishor0513' },
-                                                { icon: <Linkedin size={20} />, label: 'LinkedIn', href: 'https://linkedin.com/in/kishor-chaudhary' },
-                                                { icon: <Instagram size={20} />, label: 'Instagram', href: 'https://www.instagram.com/kishor0513/' },
-                                                { icon: <Globe size={20} />, label: 'Linktree', href: 'https://linktr.ee/kishor0513' }
-                                            ].map((social, i) => (
-                                                <a
-                                                    key={i}
-                                                    href={social.href}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="flex items-center gap-4 text-gray-400 hover:text-primary transition-all group"
-                                                >
-                                                    <div className="w-10 h-10 rounded-xl glass-panel flex items-center justify-center border border-white/5 group-hover:border-primary/50 transition-all">
-                                                        {social.icon}
-                                                    </div>
-                                                    <span className="font-semibold tracking-wide uppercase text-xs">{social.label}</span>
-                                                </a>
-                                            ))}
                                         </div>
                                     </div>
                                 </motion.div>
