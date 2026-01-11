@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import emailjs from '@emailjs/browser';
 import Hero3D from './components/canvas/Hero3D';
 import QRCodeModal from './components/ui/QRCodeModal';
 import Navbar from './components/ui/Navbar';
@@ -7,6 +8,9 @@ import { Github, Linkedin, Mail, ExternalLink, Code2, Database, Globe, Smartphon
 
 function App() {
     const [isQRModalOpen, setIsQRModalOpen] = useState(false);
+    const [isSending, setIsSending] = useState(false);
+    const [submitStatus, setSubmitStatus] = useState(null); // 'success', 'error', or null
+    const formRef = useRef();
 
     // Animation variants
     const fadeIn = {
@@ -250,12 +254,30 @@ function App() {
                                 <div className="absolute top-0 right-0 w-32 h-32 rounded-full blur-[50px] bg-primary/20 pointer-events-none" />
                                 <h3 className="mb-6 text-2xl font-bold">Send Me a Message</h3>
                                 <form
+                                    ref={formRef}
                                     onSubmit={(e) => {
                                         e.preventDefault();
-                                        const name = e.target.elements.name.value;
-                                        const email = e.target.elements.email.value;
-                                        const message = e.target.elements.message.value;
-                                        window.location.href = `mailto:kishorc2000@gmail.com?subject=Portfolio Contact from ${name}&body=From: ${name}%0AEmail: ${email}%0A%0AMessage:%0A${message}`;
+                                        setIsSending(true);
+                                        setSubmitStatus(null);
+
+                                        emailjs.sendForm(
+                                            'service_tmldjzb',
+                                            'template_b748drf',
+                                            formRef.current,
+                                            'pFJE1WaB8zsqoN9Z0'
+                                        )
+                                            .then((result) => {
+                                                console.log(result.text);
+                                                setIsSending(false);
+                                                setSubmitStatus('success');
+                                                e.target.reset();
+                                                // Reset status after 5 seconds
+                                                setTimeout(() => setSubmitStatus(null), 5000);
+                                            }, (error) => {
+                                                console.log(error.text);
+                                                setIsSending(false);
+                                                setSubmitStatus('error');
+                                            });
                                     }}
                                     className="space-y-4"
                                 >
@@ -263,7 +285,8 @@ function App() {
                                         <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-400">Your Name</label>
                                         <input
                                             type="text"
-                                            name="name"
+                                            name="user_name"
+                                            id="name"
                                             required
                                             className="w-full px-4 py-3 text-white transition-colors rounded-xl bg-white/5 border border-white/10 focus:outline-none focus:border-primary/50 placeholder-gray-500"
                                             placeholder="What's your good name?"
@@ -273,7 +296,8 @@ function App() {
                                         <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-400">Your Email</label>
                                         <input
                                             type="email"
-                                            name="email"
+                                            name="user_email"
+                                            id="email"
                                             required
                                             className="w-full px-4 py-3 text-white transition-colors rounded-xl bg-white/5 border border-white/10 focus:outline-none focus:border-primary/50 placeholder-gray-500"
                                             placeholder="What's your email address?"
@@ -283,17 +307,41 @@ function App() {
                                         <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-400">Your Message</label>
                                         <textarea
                                             name="message"
+                                            id="message"
                                             required
                                             rows="4"
                                             className="w-full px-4 py-3 text-white transition-colors resize-none rounded-xl bg-white/5 border border-white/10 focus:outline-none focus:border-primary/50 placeholder-gray-500"
                                             placeholder="How can I help you?"
                                         />
                                     </div>
+
+                                    {submitStatus === 'success' && (
+                                        <p className="text-green-400 text-sm font-medium animate-pulse text-center">
+                                            Message sent successfully! I'll get back to you soon.
+                                        </p>
+                                    )}
+
+                                    {submitStatus === 'error' && (
+                                        <p className="text-red-400 text-sm font-medium text-center">
+                                            Failed to send message. Please try again or use direct email.
+                                        </p>
+                                    )}
+
                                     <button
                                         type="submit"
-                                        className="w-full py-4 font-bold text-white transition-transform rounded-xl bg-gradient-to-r from-primary to-secondary shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98]"
+                                        disabled={isSending}
+                                        className={`w-full py-4 font-bold text-white transition-all rounded-xl shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] ${isSending ? 'opacity-70 cursor-not-allowed grayscale' : 'bg-gradient-to-r from-primary to-secondary'
+                                            }`}
                                     >
-                                        SEND MESSAGE
+                                        {isSending ? (
+                                            <span className="flex items-center justify-center gap-2">
+                                                <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                                </svg>
+                                                SENDING...
+                                            </span>
+                                        ) : 'SEND MESSAGE'}
                                     </button>
                                 </form>
                             </div>
