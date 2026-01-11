@@ -117,4 +117,4 @@ out
 .pnp.*
 
 # Vite
-dist
+# dist is deployed to GitHub Pages, so we include it
