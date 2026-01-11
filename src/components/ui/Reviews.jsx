@@ -9,7 +9,7 @@ const ReviewCard = ({ review, index }) => (
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: index * 0.1 }}
         whileHover={{ y: -10 }}
-        className="glass-card p-8 rounded-3xl border border-white/10 hover:border-primary/40 transition-all shadow-xl group h-full flex flex-col"
+        className="glass-card p-8 rounded-3xl border border-white/10 hover:border-primary/40 transition-all shadow-xl group h-full flex flex-col liquid-glass"
     >
         <div className="flex items-center gap-1 mb-6">
             {[...Array(5)].map((_, i) => (

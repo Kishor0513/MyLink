@@ -89,7 +89,7 @@ function App() {
                                 <div className="absolute inset-0 bg-gradient-to-tr from-primary/30 to-secondary/30 rounded-full blur-[100px] -z-10 animate-pulse"></div>
 
                                 {/* Image Container */}
-                                <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/10 glass-card p-4 transform hover:scale-105 transition-transform duration-500">
+                                <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/10 glass-card p-4 transform hover:scale-105 transition-transform duration-500 liquid-glass">
                                     <img
                                         src="/assets/anime_coder_panda.png"
                                         alt="Anime Panda Coding"
@@ -135,7 +135,7 @@ function App() {
 
                         <div className="grid md:grid-cols-3 gap-8">
                             {/* Frontend */}
-                            <motion.div whileHover={{ y: -5 }} className="glass-panel p-8 rounded-2xl">
+                            <motion.div whileHover={{ y: -5 }} className="glass-panel p-8 rounded-2xl liquid-glass">
                                 <div className="w-12 h-12 bg-blue-500/10 rounded-xl flex items-center justify-center mb-6 text-blue-400">
                                     <Globe size={24} />
                                 </div>
@@ -148,7 +148,7 @@ function App() {
                             </motion.div>
 
                             {/* Backend */}
-                            <motion.div whileHover={{ y: -5 }} className="glass-panel p-8 rounded-2xl">
+                            <motion.div whileHover={{ y: -5 }} className="glass-panel p-8 rounded-2xl liquid-glass">
                                 <div className="w-12 h-12 bg-green-500/10 rounded-xl flex items-center justify-center mb-6 text-green-400">
                                     <Server size={24} />
                                 </div>
@@ -161,7 +161,7 @@ function App() {
                             </motion.div>
 
                             {/* Tools & Arch */}
-                            <motion.div whileHover={{ y: -5 }} className="glass-panel p-8 rounded-2xl">
+                            <motion.div whileHover={{ y: -5 }} className="glass-panel p-8 rounded-2xl liquid-glass">
                                 <div className="w-12 h-12 bg-purple-500/10 rounded-xl flex items-center justify-center mb-6 text-purple-400">
                                     <Cpu size={24} />
                                 </div>
@@ -212,7 +212,7 @@ function App() {
                                     key={i}
                                     whileHover={{ y: -10 }}
                                     viewport={{ once: true }}
-                                    className="glass-card overflow-hidden group hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300 transform"
+                                    className="glass-card overflow-hidden group hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300 transform liquid-glass"
                                 >
                                     <div className="aspect-[4/3] bg-gradient-to-br from-gray-900 to-black relative">
                                         <div className="absolute inset-0 bg-primary/5 group-hover:bg-primary/10 transition-colors" />
@@ -271,29 +271,37 @@ function App() {
                                                 <div className="h-0.5 w-12 bg-primary/30 rounded-full ml-1" />
                                             </div>
 
-                                            <div className="grid sm:grid-cols-1 gap-4">
+                                            <div className="flex flex-wrap gap-4">
                                                 {[
-                                                    { icon: <Mail size={20} />, label: 'Email', href: 'mailto:kishorc2000@gmail.com', value: 'kishorc2000@gmail.com' },
-                                                    { icon: <Github size={20} />, label: 'GitHub', href: 'https://github.com/Kishor0513', value: 'Kishor0513' },
-                                                    { icon: <Linkedin size={20} />, label: 'LinkedIn', href: 'https://linkedin.com/in/kishor-chaudhary', value: 'Kishor Chaudhary' },
-                                                    { icon: <Instagram size={20} />, label: 'Instagram', href: 'https://www.instagram.com/kishor0513/', value: '@kishor0513' },
-                                                    { icon: <Globe size={20} />, label: 'Linktree', href: 'https://linktr.ee/kishor0513', value: 'kishor0513' }
+                                                    { icon: <Mail size={22} />, label: 'Email', href: 'mailto:kishorc2000@gmail.com', value: 'kishorc2000@gmail.com' },
+                                                    { icon: <Github size={22} />, label: 'GitHub', href: 'https://github.com/Kishor0513', value: 'Kishor0513' },
+                                                    { icon: <Linkedin size={22} />, label: 'LinkedIn', href: 'https://linkedin.com/in/kishor-chaudhary', value: 'Kishor Chaudhary' },
+                                                    { icon: <Instagram size={22} />, label: 'Instagram', href: 'https://www.instagram.com/kishor0513/', value: '@kishor0513' },
+                                                    { icon: <Globe size={22} />, label: 'Linktree', href: 'https://linktr.ee/kishor0513', value: 'kishor0513' }
                                                 ].map((social, i) => (
-                                                    <a
+                                                    <motion.a
                                                         key={i}
                                                         href={social.href}
                                                         target="_blank"
                                                         rel="noopener noreferrer"
-                                                        className="flex items-center gap-4 text-gray-400 hover:text-primary transition-all group glass-panel p-4 rounded-3xl border border-white/5 hover:border-primary/20 bg-white/[0.02]"
+                                                        initial={{ width: '60px' }}
+                                                        whileHover={{ width: 'auto' }}
+                                                        className="h-[60px] flex items-center overflow-hidden text-gray-400 hover:text-primary transition-all group glass-panel rounded-full border border-white/10 hover:border-primary/30 bg-white/[0.02] liquid-glass shrink-0"
                                                     >
-                                                        <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center group-hover:bg-primary/20 transition-all text-gray-400 group-hover:text-primary">
+                                                        <div className="min-w-[60px] h-[60px] flex items-center justify-center group-hover:bg-primary/10 transition-all text-gray-400 group-hover:text-primary">
                                                             {social.icon}
                                                         </div>
-                                                        <div className="flex flex-col">
-                                                            <span className="text-[11px] font-bold uppercase tracking-widest text-gray-500 mb-0.5">{social.label}</span>
-                                                            <span className="text-base font-semibold text-white group-hover:text-primary transition-colors">{social.value}</span>
-                                                        </div>
-                                                    </a>
+                                                        <AnimatePresence>
+                                                            <motion.div
+                                                                initial={{ opacity: 0, width: 0 }}
+                                                                whileHover={{ opacity: 1, width: 'auto', marginLeft: '12px', marginRight: '24px' }}
+                                                                className="flex flex-col whitespace-nowrap overflow-hidden"
+                                                            >
+                                                                <span className="text-[10px] font-bold uppercase tracking-widest text-gray-500 leading-none mb-1">{social.label}</span>
+                                                                <span className="text-sm font-semibold text-white group-hover:text-primary transition-colors leading-none">{social.value}</span>
+                                                            </motion.div>
+                                                        </AnimatePresence>
+                                                    </motion.a>
                                                 ))}
                                             </div>
                                         </div>

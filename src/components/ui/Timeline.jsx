@@ -17,7 +17,7 @@ const TimelineItem = ({ data, index }) => (
             {data.type === 'work' ? <Briefcase size={18} /> : <GraduationCap size={18} />}
         </div>
 
-        <div className="order-1 glass-panel border border-white/10 rounded-2xl shadow-xl w-full md:w-5/12 px-6 py-6 hover:border-primary/30 transition-colors group">
+        <div className="order-1 glass-panel border border-white/10 rounded-2xl shadow-xl w-full md:w-5/12 px-6 py-6 hover:border-primary/30 transition-colors group liquid-glass">
             <div className="flex items-center gap-2 mb-2 text-primary text-sm font-mono">
                 <Calendar size={14} />
                 <span>{data.period}</span>

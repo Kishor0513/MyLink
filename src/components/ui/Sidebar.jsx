@@ -26,7 +26,7 @@ const Sidebar = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         whileHover={{ scale: 1.2, x: -5 }}
-                        className="text-gray-400 hover:text-primary transition-colors p-2 glass-panel rounded-xl border border-white/5 hover:border-primary/50 group relative"
+                        className="text-gray-400 hover:text-primary transition-colors p-2 glass-panel rounded-xl border border-white/5 hover:border-primary/50 group relative liquid-glass"
                     >
                         {social.icon}
                         <span className="absolute right-full mr-4 px-2 py-1 bg-primary text-dark text-xs font-bold rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">

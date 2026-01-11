@@ -9,14 +9,40 @@
   }
 
   .glass-card {
-    @apply bg-surface/30 backdrop-blur-md border border-white/10 shadow-xl rounded-2xl;
+    @apply bg-surface/40 backdrop-blur-2xl border border-white/10 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] rounded-[2.5rem] transition-all duration-500;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
   }
 
   .glass-panel {
-    @apply bg-white/5 backdrop-blur-lg border border-white/10;
+    @apply bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-2xl;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
   }
 
   .text-glow {
-    text-shadow: 0 0 20px rgba(191, 168, 255, 0.5);
+    text-shadow: 0 0 30px rgba(167, 139, 250, 0.6);
+  }
+
+  .liquid-glass {
+    @apply relative overflow-hidden;
+  }
+
+  .liquid-glass::before {
+    content: '';
+    @apply absolute -inset-full bg-gradient-to-r from-transparent via-white/5 to-transparent -rotate-45 transition-all duration-1000 pointer-events-none;
+  }
+
+  .liquid-glass:hover::before {
+    @apply translate-x-full translate-y-full;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  .animate-shimmer {
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 3s infinite linear;
   }
 }
