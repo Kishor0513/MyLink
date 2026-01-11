@@ -56,10 +56,10 @@ function App() {
                                 </span>
                             </h1>
                             <h2 className="text-2xl md:text-3xl text-gray-300 mb-8 font-light">
-                                Senior <span className="text-primary font-medium">Full Stack Engineer</span>
+                                Your <span className="text-primary font-medium">Professional Title</span>
                             </h2>
                             <p className="text-lg text-gray-400 mb-10 max-w-lg leading-relaxed">
-                                Architecture, Scalability, and immersive 3D Digital Experiences. Turning complex problems into elegant code.
+                                Share your unique value proposition and how you help your clients or employers here.
                             </p>
                             <div className="flex flex-wrap gap-5">
                                 <a
@@ -402,7 +402,7 @@ function App() {
                         </div>
 
                         <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/5 gap-4">
-                            <p className="text-gray-500 text-sm">© 2024 Kishor Chaudhary. Crafted with precision.</p>
+                            <p className="text-gray-500 text-sm">© {new Date().getFullYear()} Kishor Chaudhary. All rights reserved.</p>
                             <div className="flex gap-8">
                                 <a href="#" className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-primary transition-colors">Privacy</a>
                                 <a href="#" className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-primary transition-colors">Terms</a>

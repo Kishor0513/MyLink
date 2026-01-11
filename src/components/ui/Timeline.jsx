@@ -33,24 +33,24 @@ const Timeline = () => {
     const experiences = [
         {
             type: 'work',
-            title: 'Senior Full Stack Engineer',
-            company: 'Current Endeavor',
+            title: 'Your Job Title',
+            company: 'Company Name',
             period: '2023 - Present',
-            description: 'Leading architecture and development of scalable web applications using React, Node.js, and cloud services. Implementing 3D immersive experiences with Three.js.'
+            description: 'Provide a brief description of your role and key accomplishments here.'
         },
         {
             type: 'work',
-            title: 'Full Stack Developer',
-            company: 'Tech Solutions Inc.',
+            title: 'Previous Role',
+            company: 'Tech Solutions',
             period: '2021 - 2023',
-            description: 'Developed and maintained complex web platforms. Focused on performance optimization and modern UI/UX principles.'
+            description: 'Describe your previous experience and the impact you made in this position.'
         },
         {
             type: 'education',
-            title: 'Computer Science & Engineering',
-            company: 'Padmashree International College',
+            title: 'Your Degree',
+            company: 'University Name',
             period: '2019 - 2023',
-            description: 'Focused on software engineering, data structures, and algorithms. Actively participated in hackathons and coding challenges.'
+            description: 'Mention your field of study and any notable academic highlights or projects.'
         }
     ];
 

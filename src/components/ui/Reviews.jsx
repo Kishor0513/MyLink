@@ -36,25 +36,25 @@ const ReviewCard = ({ review, index }) => (
 const Reviews = () => {
     const reviews = [
         {
-            name: 'Sarah Johnson',
-            role: 'Product Manager @ TechFlow',
-            text: 'Kishor is an exceptional engineer. His ability to transform complex requirements into intuitive 3D experiences is unmatched. A true professional.',
+            name: 'Client Name',
+            role: 'CEO @ FutureTech',
+            text: 'Insert a testimonial or client feedback here describing the quality of your work and professionalism.',
             rating: 5,
-            image: 'https://i.pravatar.cc/150?u=sarah'
+            image: 'https://i.pravatar.cc/150?u=1'
         },
         {
-            name: 'David Chen',
-            role: 'Founder, StartupX',
-            text: 'Working with Kishor was a game-changer for our platform. His full-stack expertise and attention to detail saved us months of development time.',
+            name: 'Collaborator Name',
+            role: 'Lead Designer',
+            text: 'You can add reviews from people you have worked with to build trust and credibility with new clients.',
             rating: 5,
-            image: 'https://i.pravatar.cc/150?u=david'
+            image: 'https://i.pravatar.cc/150?u=2'
         },
         {
-            name: 'Elena Rodriguez',
-            role: 'Creative Director',
-            text: 'The 3D portfolio he built exceeded all expectations. The animations are smooth, and the design is incredibly premium. Highly recommended!',
+            name: 'User Name',
+            role: 'Product Manager',
+            text: 'High-quality feedback helps demonstrate the value you bring to projects and organizations.',
             rating: 5,
-            image: 'https://i.pravatar.cc/150?u=elena'
+            image: 'https://i.pravatar.cc/150?u=3'
         }
     ];
 
