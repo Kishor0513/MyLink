@@ -40,7 +40,7 @@ function App() {
 
                 <div className="fixed inset-0 z-0 pointer-events-none">
                     <Suspense fallback={null}>
-                        {/* <Hero3D /> */}
+                        <Hero3D />
                     </Suspense>
                 </div>
 
