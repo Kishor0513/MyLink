@@ -26,12 +26,14 @@ function App() {
             <Navbar onOpenQR={() => setIsQRModalOpen(true)} />
             <Sidebar />
 
-            <main>
+            <div className="fixed inset-0 z-0 pointer-events-none">
+                <Hero3D />
+            </div>
+
+            <main className="relative z-10">
                 {/* Hero Section */}
                 <section id="home" className="relative min-h-screen flex flex-col justify-center px-6 overflow-hidden pt-20">
-                    <div className="absolute inset-0 z-0">
-                        <Hero3D />
-                    </div>
+                    {/* Background removed as it is now global */}
 
                     {/* Gradient Overlays for Lavender Effect */}
                     <div className="absolute inset-0 bg-gradient-to-b from-dark/20 via-transparent to-dark pointer-events-none" />
