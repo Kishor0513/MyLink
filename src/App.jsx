@@ -42,6 +42,8 @@ function LoadingSpinner() {
   );
 }
 
+import ShootingStars from "./components/ui/ShootingStars";
+
 function App() {
   const [isQRModalOpen, setIsQRModalOpen] = useState(false);
   const [isSending, setIsSending] = useState(false);
@@ -61,6 +63,7 @@ function App() {
         <Sidebar />
 
         <div className="fixed inset-0 z-0 pointer-events-none">
+          <ShootingStars />
           <Suspense
             fallback={
               <div className="w-full h-full flex items-center justify-center">
@@ -195,10 +198,7 @@ function App() {
           <Timeline />
 
           {/* 2. SKILLS SECTION */}
-          <section
-            id="skills"
-            className="py-32 px-6 relative bg-dark/50 backdrop-blur-sm"
-          >
+          <section id="skills" className="py-32 px-6 relative bg-transparent">
             <div className="max-w-7xl mx-auto">
               <motion.div
                 initial="hidden"
@@ -398,7 +398,7 @@ function App() {
           {/* Footer / Contact Section */}
           <footer
             id="contact"
-            className="relative pt-32 pb-16 overflow-hidden bg-dark"
+            className="relative pt-32 pb-16 overflow-hidden bg-dark/80 backdrop-blur-sm"
           >
             <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
@@ -645,18 +645,18 @@ function App() {
                   reserved.
                 </p>
                 <div className="flex gap-8">
-                  <a
-                    href="#"
-                    className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-primary transition-colors"
+                  <button
+                    onClick={(e) => e.preventDefault()}
+                    className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-primary transition-colors cursor-pointer"
                   >
                     Privacy
-                  </a>
-                  <a
-                    href="#"
-                    className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-primary transition-colors"
+                  </button>
+                  <button
+                    onClick={(e) => e.preventDefault()}
+                    className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-primary transition-colors cursor-pointer"
                   >
                     Terms
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>

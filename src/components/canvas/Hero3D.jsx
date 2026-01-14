@@ -81,10 +81,14 @@ const ParticleGlobe = () => {
 
 const Hero3D = () => {
   return (
-    <div className="absolute inset-0 -z-10 bg-dark select-none pointer-events-none">
+    <div
+      className="absolute inset-0 bg-dark select-none pointer-events-none"
+      style={{ zIndex: 1 }}
+    >
       <Canvas
         camera={{ position: [0, 0, 6], fov: 45 }}
         gl={{ alpha: true, antialias: true }}
+        style={{ width: "100%", height: "100%" }}
       >
         <ParticleGlobe />
       </Canvas>

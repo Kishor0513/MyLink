@@ -33,7 +33,7 @@ const Navbar = ({ onOpenQR }) => {
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         <motion.a
-          href="#"
+          href="#home"
           className="text-xl font-bold tracking-tight group flex items-center gap-0.5"
           style={{ fontFamily: "Space Grotesk, Inter, system-ui, sans-serif" }}
           whileHover={{ scale: 1.05 }}
