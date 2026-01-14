@@ -141,7 +141,7 @@ function App() {
                 initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
                 whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
                 transition={{ duration: 1, delay: 0.2 }}
-                className="hidden md:block relative w-full flex items-center justify-center p-8"
+                className="hidden md:flex relative w-full items-center justify-center p-8"
               >
                 <div className="relative w-full max-w-lg aspect-square">
                   {/* Gradient Glow Background */}
