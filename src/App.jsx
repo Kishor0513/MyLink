@@ -117,22 +117,30 @@ function App() {
                   problems into elegant, user-centric code.
                 </p>
                 <div className="flex flex-wrap gap-5">
-                  <a
-                    href="#skills"
-                    className="px-8 py-4 bg-white text-dark font-bold rounded-full hover:bg-primary transition-all shadow-lg shadow-primary/20 hover:scale-105 active:scale-95"
+                  <motion.a
+                    href="#projects"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="group relative px-10 py-5 bg-white/5 backdrop-blur-xl border border-white/20 text-white font-bold rounded-full overflow-hidden transition-all shadow-lg shadow-primary/20 hover:bg-dark/80 liquid-glass"
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "0.75rem",
+                    }}
                   >
-                    Explore Skills
-                  </a>
-                  <button
-                    onClick={() =>
-                      document
-                        .getElementById("contact")
-                        .scrollIntoView({ behavior: "smooth" })
-                    }
-                    className="px-8 py-4 glass-panel text-white font-medium rounded-full hover:bg-white/10 transition-all border border-white/20 hover:border-primary/50"
-                  >
-                    Get in Touch
-                  </button>
+                    <span className="relative z-10">See My Work</span>
+                    <motion.span
+                      animate={{ y: [0, 5, 0] }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                      className="text-primary relative z-10"
+                    >
+                      <ArrowRight size={20} className="rotate-90" />
+                    </motion.span>
+                  </motion.a>
                 </div>
               </motion.div>
 
@@ -185,13 +193,6 @@ function App() {
                   </motion.div>
                 </div>
               </motion.div>
-            </div>
-
-            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-gray-500">
-              <span className="text-xs uppercase tracking-[0.2em] opacity-80">
-                Scroll
-              </span>
-              <div className="w-px h-12 bg-gradient-to-b from-primary to-transparent"></div>
             </div>
           </section>
 
@@ -398,112 +399,178 @@ function App() {
           {/* Footer / Contact Section */}
           <footer
             id="contact"
-            className="relative pt-32 pb-16 overflow-hidden bg-dark/80 backdrop-blur-sm"
+            className="relative pt-32 pb-16 overflow-hidden bg-dark/50 backdrop-blur-sm"
           >
             <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
             <div className="max-w-7xl mx-auto px-6 relative z-10">
               <div className="grid lg:grid-cols-2 gap-20 items-start mb-24">
-                {/* Left Side: Text and Socials */}
-                <div>
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                  >
-                    <h2 className="text-5xl md:text-6xl font-bold text-white mb-8 leading-tight">
-                      Let's build something{" "}
-                      <span className="text-primary italic">
-                        extraordinary.
-                      </span>
-                    </h2>
-                    <p className="text-xl text-gray-400 mb-12 max-w-md leading-relaxed">
-                      Have an idea? I'm open for freelance projects and
-                      full-time opportunities.
-                    </p>
+                {/* Left Side: Developer Illustration */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                  className="relative"
+                >
+                  <div className="relative w-full aspect-square max-w-md mx-auto">
+                    {/* Animated Background Glow */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-full blur-3xl animate-pulse" />
 
-                    <div className="flex flex-col gap-10">
-                      <div className="space-y-6">
-                        <div className="flex flex-col gap-3">
-                          <h4 className="text-sm font-bold uppercase tracking-[0.3em] text-primary/60 ml-1">
-                            Connect With Me
-                          </h4>
-                          <div className="h-0.5 w-12 bg-primary/30 rounded-full ml-1" />
-                        </div>
+                    {/* Developer SVG Illustration */}
+                    <motion.div
+                      animate={{
+                        y: [0, -20, 0],
+                        rotate: [0, 5, 0, -5, 0],
+                      }}
+                      transition={{
+                        duration: 6,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                      className="relative z-10 flex items-center justify-center"
+                    >
+                      <svg
+                        viewBox="0 0 400 400"
+                        className="w-full h-full drop-shadow-2xl"
+                      >
+                        {/* Code Editor Window */}
+                        <rect
+                          x="50"
+                          y="80"
+                          width="300"
+                          height="240"
+                          rx="12"
+                          fill="url(#editorGradient)"
+                        />
+                        <defs>
+                          <linearGradient
+                            id="editorGradient"
+                            x1="0%"
+                            y1="0%"
+                            x2="0%"
+                            y2="100%"
+                          >
+                            <stop offset="0%" stopColor="#1a0b2e" />
+                            <stop offset="100%" stopColor="#0f0518" />
+                          </linearGradient>
+                        </defs>
 
-                        <div className="flex flex-wrap gap-4">
-                          {[
-                            {
-                              icon: <Mail size={22} />,
-                              label: "Email",
-                              href: "mailto:kishorc2000@gmail.com",
-                              value: "kishorc2000@gmail.com",
-                            },
-                            {
-                              icon: <Github size={22} />,
-                              label: "GitHub",
-                              href: "https://github.com/Kishor0513",
-                              value: "Kishor0513",
-                            },
-                            {
-                              icon: <Linkedin size={22} />,
-                              label: "LinkedIn",
-                              href: "https://linkedin.com/in/kishor-chaudhary",
-                              value: "Kishor Chaudhary",
-                            },
-                            {
-                              icon: <Instagram size={22} />,
-                              label: "Instagram",
-                              href: "https://www.instagram.com/kishor0513/",
-                              value: "@kishor0513",
-                            },
-                            {
-                              icon: <Globe size={22} />,
-                              label: "Linktree",
-                              href: "https://linktr.ee/kishor0513",
-                              value: "kishor0513",
-                            },
-                          ].map((social, i) => (
-                            <motion.a
-                              key={i}
-                              href={social.href}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              initial={{ width: "60px" }}
-                              whileHover={{ width: "auto" }}
-                              className="h-[60px] flex items-center overflow-hidden text-gray-400 hover:text-primary transition-all group glass-panel rounded-full border border-white/10 hover:border-primary/30 bg-white/[0.02] liquid-glass shrink-0"
-                            >
-                              <div className="min-w-[60px] h-[60px] flex items-center justify-center group-hover:bg-primary/10 transition-all text-gray-400 group-hover:text-primary">
-                                {social.icon}
-                              </div>
-                              <AnimatePresence>
-                                <motion.div
-                                  initial={{ opacity: 0, width: 0 }}
-                                  whileHover={{
-                                    opacity: 1,
-                                    width: "auto",
-                                    marginLeft: "12px",
-                                    marginRight: "24px",
-                                  }}
-                                  className="flex flex-col whitespace-nowrap overflow-hidden"
-                                >
-                                  <span className="text-[10px] font-bold uppercase tracking-widest text-gray-500 leading-none mb-1">
-                                    {social.label}
-                                  </span>
-                                  <span className="text-sm font-semibold text-white group-hover:text-primary transition-colors leading-none">
-                                    {social.value}
-                                  </span>
-                                </motion.div>
-                              </AnimatePresence>
-                            </motion.a>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
-                </div>
+                        {/* Window Controls */}
+                        <circle cx="70" cy="100" r="5" fill="#ff5f57" />
+                        <circle cx="90" cy="100" r="5" fill="#ffbd2e" />
+                        <circle cx="110" cy="100" r="5" fill="#28ca42" />
 
-                {/* Right Side: Contact Form (Half Section) */}
+                        {/* Code Lines */}
+                        <motion.rect
+                          x="70"
+                          y="130"
+                          width="80"
+                          height="4"
+                          rx="2"
+                          fill="#a78bfa"
+                          animate={{ opacity: [0.5, 1, 0.5] }}
+                          transition={{ duration: 2, repeat: Infinity }}
+                        />
+                        <rect
+                          x="70"
+                          y="150"
+                          width="120"
+                          height="4"
+                          rx="2"
+                          fill="#8b5cf6"
+                          opacity="0.7"
+                        />
+                        <rect
+                          x="70"
+                          y="170"
+                          width="100"
+                          height="4"
+                          rx="2"
+                          fill="#a78bfa"
+                          opacity="0.6"
+                        />
+                        <motion.rect
+                          x="70"
+                          y="190"
+                          width="140"
+                          height="4"
+                          rx="2"
+                          fill="#8b5cf6"
+                          animate={{ opacity: [0.6, 1, 0.6] }}
+                          transition={{ duration: 2.5, repeat: Infinity }}
+                        />
+                        <rect
+                          x="70"
+                          y="210"
+                          width="90"
+                          height="4"
+                          rx="2"
+                          fill="#a78bfa"
+                          opacity="0.7"
+                        />
+
+                        {/* Floating Code Symbols */}
+                        <motion.text
+                          x="280"
+                          y="140"
+                          fontSize="24"
+                          fill="#a78bfa"
+                          animate={{
+                            y: [140, 130, 140],
+                            opacity: [0.5, 1, 0.5],
+                          }}
+                          transition={{ duration: 3, repeat: Infinity }}
+                        >
+                          {"</>"}
+                        </motion.text>
+                        <motion.text
+                          x="260"
+                          y="200"
+                          fontSize="20"
+                          fill="#8b5cf6"
+                          animate={{
+                            y: [200, 190, 200],
+                            opacity: [0.5, 1, 0.5],
+                          }}
+                          transition={{
+                            duration: 2.5,
+                            repeat: Infinity,
+                            delay: 0.5,
+                          }}
+                        >
+                          {"{ }"}
+                        </motion.text>
+                      </svg>
+                    </motion.div>
+
+                    {/* Floating Tech Icons */}
+                    <motion.div
+                      animate={{ rotate: 360 }}
+                      transition={{
+                        duration: 20,
+                        repeat: Infinity,
+                        ease: "linear",
+                      }}
+                      className="absolute inset-0"
+                    >
+                      <Code2
+                        className="absolute top-10 left-10 text-primary"
+                        size={32}
+                      />
+                      <Server
+                        className="absolute bottom-10 right-10 text-secondary"
+                        size={32}
+                      />
+                      <Cpu
+                        className="absolute top-10 right-10 text-primary"
+                        size={28}
+                      />
+                    </motion.div>
+                  </div>
+                </motion.div>
+
+                {/* Right Side: Contact Form */}
                 <motion.div
                   initial={{ opacity: 0, x: 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -511,7 +578,7 @@ function App() {
                   className="relative group"
                 >
                   <div className="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-[2rem] blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200" />
-                  <div className="relative p-10 overflow-hidden rounded-[2rem] bg-surface border border-white/10 shadow-2xl">
+                  <div className="relative p-10 overflow-hidden rounded-[2rem] bg-surface/50 border border-white/10 shadow-2xl backdrop-blur-md">
                     <h3 className="mb-8 text-2xl font-bold text-white">
                       Send Me a Message
                     </h3>
@@ -620,7 +687,7 @@ function App() {
                       <button
                         type="submit"
                         disabled={isSending}
-                        className="w-full py-5 font-bold text-dark bg-primary rounded-2xl shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-3 disabled:opacity-50"
+                        className="w-full py-5 font-bold text-dark bg-primary rounded-2xl shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-3 disabled:opacity-50 liquid-glass"
                       >
                         {isSending ? (
                           <>
@@ -647,13 +714,13 @@ function App() {
                 <div className="flex gap-8">
                   <button
                     onClick={(e) => e.preventDefault()}
-                    className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-primary transition-colors cursor-pointer"
+                    className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-primary transition-colors cursor-pointer px-4 py-2 rounded-lg liquid-glass"
                   >
                     Privacy
                   </button>
                   <button
                     onClick={(e) => e.preventDefault()}
-                    className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-primary transition-colors cursor-pointer"
+                    className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-primary transition-colors cursor-pointer px-4 py-2 rounded-lg liquid-glass"
                   >
                     Terms
                   </button>

@@ -25,11 +25,10 @@ const Navbar = ({ onOpenQR }) => {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
-        scrolled
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${scrolled
           ? "py-4 bg-dark/70 backdrop-blur-xl border-b border-white/5"
           : "py-6 bg-transparent"
-      }`}
+        }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         <motion.a
@@ -65,7 +64,7 @@ const Navbar = ({ onOpenQR }) => {
               onClick={onOpenQR}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="p-2.5 bg-white/5 hover:bg-white/10 rounded-full border border-white/10 transition-all text-primary"
+              className="p-2.5 bg-white/5 hover:bg-white/10 rounded-full border border-white/10 transition-all text-primary liquid-glass"
             >
               <QrCode size={20} />
             </motion.button>
@@ -74,7 +73,7 @@ const Navbar = ({ onOpenQR }) => {
               href="#contact"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-6 py-2.5 bg-primary text-dark font-bold rounded-full text-sm flex items-center gap-2 group shadow-lg shadow-primary/20"
+              className="px-6 py-2.5 bg-primary text-dark font-bold rounded-full text-sm flex items-center gap-2 group shadow-lg shadow-primary/20 liquid-glass"
               style={{ fontFamily: "Outfit, Inter, system-ui, sans-serif" }}
             >
               Hire Me
@@ -88,7 +87,7 @@ const Navbar = ({ onOpenQR }) => {
 
         {/* Mobile Toggle */}
         <button
-          className="lg:hidden p-2 text-gray-300 hover:text-white transition-colors"
+          className="lg:hidden p-2 text-gray-300 hover:text-white transition-colors rounded-lg liquid-glass"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
           {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
@@ -136,7 +135,7 @@ const Navbar = ({ onOpenQR }) => {
                 onOpenQR();
                 setMobileMenuOpen(false);
               }}
-              className="mt-4 px-10 py-4 bg-primary text-dark font-bold rounded-full text-xl"
+              className="mt-4 px-10 py-4 bg-primary text-dark font-bold rounded-full text-xl liquid-glass"
               style={{ fontFamily: "Outfit, Inter, system-ui, sans-serif" }}
             >
               Open QR Code
