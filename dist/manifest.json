@@ -1,0 +1,23 @@
+{
+	"name": "Kishor Chaudhary - Full Stack Developer",
+	"short_name": "Kishor Portfolio",
+	"description": "Full Stack Developer specializing in high-performance web architectures, scalable systems, and immersive 3D digital experiences",
+	"start_url": "/",
+	"display": "standalone",
+	"background_color": "#0f0518",
+	"theme_color": "#0f0518",
+	"orientation": "portrait-primary",
+	"icons": [
+		{
+			"src": "/favicon.png",
+			"sizes": "332x332",
+			"type": "image/png",
+			"purpose": "any maskable"
+		},
+		{
+			"src": "/favicon.svg",
+			"sizes": "any",
+			"type": "image/svg+xml"
+		}
+	]
+}
