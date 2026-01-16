@@ -16,14 +16,14 @@ const Sidebar = () => {
       const maxScrollableHeight = documentHeight - windowHeight;
       const scrollPercent = (scrollY / maxScrollableHeight) * 100;
 
-      // Add hysteresis: trigger at 97%, but only hide when below 95%
-      if (scrollPercent >= 97) {
+      // Add hysteresis: trigger at 99%, but only hide when below 97%
+      if (scrollPercent >= 99) {
         setIsFooterVisible(true);
-      } else if (scrollPercent < 95) {
+      } else if (scrollPercent < 97) {
         setIsFooterVisible(false);
         // Calculate scroll progress for sidebar movement (0 to 1)
-        // Icons move from 20% to 55% of viewport as we scroll from 0% to 95%
-        const progress = Math.min(Math.max(scrollPercent / 95, 0), 1);
+        // Icons move smoothly until we hit the threshold
+        const progress = Math.min(Math.max(scrollPercent / 97, 0), 1);
         setScrollPosition(progress);
       }
       // Between 95-97%, maintain current state (no flicker)
@@ -76,7 +76,7 @@ const Sidebar = () => {
           }}
           exit={{ x: 100, opacity: 0, transition: { duration: 0.3 } }}
           style={{
-            top: `${20 + scrollPosition * 35}%`,
+            top: `${7 + scrollPosition * 40}rem`,
           }}
           className="fixed right-6 z-50 hidden xl:flex flex-col gap-6"
         >

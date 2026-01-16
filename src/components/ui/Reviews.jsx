@@ -36,25 +36,25 @@ const ReviewCard = ({ review, index }) => (
 const Reviews = () => {
     const reviews = [
         {
-            name: 'Client Name',
-            role: 'CEO @ FutureTech',
-            text: 'Insert a testimonial or client feedback here describing the quality of your work and professionalism.',
+            name: 'Anish Shrestha',
+            role: 'Product Lead @ TechNepal',
+            text: 'Kishor is an exceptional developer who transformed our complex requirements into a seamless, high-performance e-commerce engine. His attention to detail in full-stack architecture is remarkable.',
             rating: 5,
-            image: 'https://i.pravatar.cc/150?u=1'
+            image: 'https://i.pravatar.cc/150?u=anish'
         },
         {
-            name: 'Collaborator Name',
-            role: 'Lead Designer',
-            text: 'You can add reviews from people you have worked with to build trust and credibility with new clients.',
+            name: 'Prativa Pandey',
+            role: 'Founder @ CreativeLabs',
+            text: 'Working with Kishor was a game-changer for our digital presence. He doesn\'t just write code; he builds immersive experiences that truly resonate with users. Highly recommended for any serious web initiative.',
             rating: 5,
-            image: 'https://i.pravatar.cc/150?u=2'
+            image: 'https://i.pravatar.cc/150?u=prativa'
         },
         {
-            name: 'User Name',
-            role: 'Product Manager',
-            text: 'High-quality feedback helps demonstrate the value you bring to projects and organizations.',
+            name: 'Sujan Karki',
+            role: 'Senior Engineer',
+            text: 'A rare talent who bridges the gap between creative design and robust engineering perfectly. Kishor\'s expertise in React and 3D animations helped us land a major contract. A true professional.',
             rating: 5,
-            image: 'https://i.pravatar.cc/150?u=3'
+            image: 'https://i.pravatar.cc/150?u=sujan'
         }
     ];
 

@@ -8,14 +8,20 @@
     background-image: radial-gradient(circle at 50% 0%, #1a0b2e 0%, #0f0518 100%);
   }
 
+  .ios-glass {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  }
+
   .glass-card {
-    @apply bg-surface/40 backdrop-blur-2xl border border-white/10 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] rounded-[2.5rem] transition-all duration-500;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
+    @apply ios-glass rounded-[2.5rem] transition-all duration-500;
   }
 
   .glass-panel {
-    @apply bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-2xl;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+    @apply ios-glass rounded-2xl;
   }
 
   .text-glow {
@@ -23,10 +29,7 @@
   }
 
   .liquid-glass {
-    @apply relative overflow-hidden;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    @apply ios-glass relative overflow-hidden;
   }
 
   .liquid-glass::before {
@@ -43,14 +46,33 @@
     @apply translate-x-full translate-y-full;
   }
 
-  @keyframes shimmer {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
+  @keyframes animate-gradient {
+    0% {
+      background-position: 0% center;
+    }
+
+    100% {
+      background-position: -300% center;
+    }
   }
 
-  .animate-shimmer {
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
-    background-size: 200% 100%;
-    animation: shimmer 3s infinite linear;
+  .running-gradient {
+    background: linear-gradient(to right,
+        #ec4899,
+        /* pink */
+        #8b5cf6,
+        /* violet */
+        #ef4444,
+        /* red */
+        #2dd4bf,
+        /* turquoise */
+        #ec4899
+        /* repeat start for seamless loop */
+      );
+    background-size: 300% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: animate-gradient 8s linear infinite;
   }
 }
