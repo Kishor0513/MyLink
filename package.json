@@ -1,38 +1,38 @@
 {
-  "name": "kishor-portfolio",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "@emailjs/browser": "^4.4.1",
-    "@react-three/drei": "^9.0.0",
-    "@react-three/fiber": "^8.0.0",
-    "@react-three/postprocessing": "^2.16.3",
-    "framer-motion": "^10.0.0",
-    "lucide-react": "^0.292.0",
-    "qrcode.react": "^3.1.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "three": "^0.158.0"
-  },
-  "devDependencies": {
-    "@types/react": "^18.2.37",
-    "@types/react-dom": "^18.2.15",
-    "@vitejs/plugin-react": "^4.2.0",
-    "autoprefixer": "^10.4.16",
-    "eslint": "^9.39.2",
-    "eslint-plugin-react": "^7.37.5",
-    "globals": "^17.0.0",
-    "lighthouse": "^13.0.1",
-    "postcss": "^8.4.31",
-    "tailwindcss": "^3.3.5",
-    "terser": "^5.46.0",
-    "vite": "^5.0.0"
-  }
+	"name": "kishor-portfolio",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build",
+		"lint": "eslint .",
+		"preview": "vite preview"
+	},
+	"dependencies": {
+		"@emailjs/browser": "^4.4.1",
+		"@react-three/drei": "^9.0.0",
+		"@react-three/fiber": "^8.0.0",
+		"@react-three/postprocessing": "^2.16.3",
+		"framer-motion": "^10.0.0",
+		"lucide-react": "^0.292.0",
+		"qrcode.react": "^3.1.0",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"three": "^0.170.0"
+	},
+	"devDependencies": {
+		"@types/react": "^18.2.37",
+		"@types/react-dom": "^18.2.15",
+		"@vitejs/plugin-react": "^4.2.0",
+		"autoprefixer": "^10.4.16",
+		"eslint": "^9.39.2",
+		"eslint-plugin-react": "^7.37.5",
+		"globals": "^17.0.0",
+		"lighthouse": "^13.0.1",
+		"postcss": "^8.4.31",
+		"tailwindcss": "^3.3.5",
+		"terser": "^5.46.0",
+		"vite": "^6.1.7"
+	}
 }
