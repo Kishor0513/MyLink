@@ -118,3 +118,6 @@ out
 
 # Vite
 # dist is deployed to GitHub Pages, so we include it
+
+# macOS system files
+.DS_Store
