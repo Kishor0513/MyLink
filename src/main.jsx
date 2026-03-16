@@ -7,14 +7,14 @@ console.log('App mounting...');
 ReactDOM.createRoot(document.getElementById('root')).render(
 	<React.StrictMode>
 		<App />
-	</React.StrictMode>
+	</React.StrictMode>,
 );
 
 // Register Service Worker for PWA
 if ('serviceWorker' in navigator) {
 	window.addEventListener('load', () => {
 		navigator.serviceWorker
-			.register('/service-worker.js')
+			.register('/service-worker.js?v=2026-03-16')
 			.then((registration) => {
 				console.log('Service Worker registered:', registration);
 			})

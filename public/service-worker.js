@@ -1,5 +1,5 @@
 // Service Worker for Kishor Portfolio
-const CACHE_NAME = 'kishor-portfolio-v1';
+const CACHE_NAME = 'kishor-portfolio-v2026-03-16';
 const urlsToCache = [
 	'/',
 	'/index.html',
@@ -11,12 +11,28 @@ const urlsToCache = [
 // Install service worker
 self.addEventListener('install', (event) => {
 	event.waitUntil(
-		caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache))
+		caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache)),
 	);
+	self.skipWaiting();
 });
 
 // Fetch assets
 self.addEventListener('fetch', (event) => {
+	if (event.request.mode === 'navigate') {
+		event.respondWith(
+			fetch(event.request)
+				.then((response) => {
+					const responseClone = response.clone();
+					caches
+						.open(CACHE_NAME)
+						.then((cache) => cache.put('/index.html', responseClone));
+					return response;
+				})
+				.catch(() => caches.match('/index.html')),
+		);
+		return;
+	}
+
 	event.respondWith(
 		caches.match(event.request).then((response) => {
 			// Cache hit - return response
@@ -24,7 +40,7 @@ self.addEventListener('fetch', (event) => {
 				return response;
 			}
 			return fetch(event.request);
-		})
+		}),
 	);
 });
 
@@ -38,8 +54,9 @@ self.addEventListener('activate', (event) => {
 					if (cacheWhitelist.indexOf(cacheName) === -1) {
 						return caches.delete(cacheName);
 					}
-				})
+				}),
 			);
-		})
+		}),
 	);
+	self.clients.claim();
 });
