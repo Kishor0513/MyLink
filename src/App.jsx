@@ -324,72 +324,108 @@ function App() {
 								<div className="h-px w-full md:w-1/2 bg-white/10 mb-2"></div>
 							</div>
 
-							<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+							<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 								{[
 									{
-										title: 'Enterprise E-commerce Platform',
-										desc: 'Modern e-commerce engine with product management, shopping cart, and secure checkout system, built for high-scale retail operations.',
-										link: 'https://github.com/Kishor0513',
-										tags: ['E-commerce', 'React', 'Node.js'],
-										image: '/assets/ecommerce.png',
+										title: 'Chiya and Puff',
+										desc: 'A full-stack restaurant operations platform featuring QR-based table ordering, real-time dashboards for staff, and integrated billing. Built with Next.js and Prisma, it optimizes the dining experience from order to payment.',
+										link: 'https://github.com/Kishor0513/Chiya-and-Puff',
+										live: '#',
+										tags: ['Next.js', 'Prisma', 'PostgreSQL'],
+										image: '/assets/real_chiya_puff.png',
+										className: 'md:col-span-2',
 									},
 									{
-										title: 'Portfolio Website',
-										desc: 'Personal portfolio showcasing projects and skills with 3D animations using Three.js and React Three Fiber.',
-										link: 'https://github.com/Kishor0513/My-Portfolio',
-										tags: ['Three.js', 'React', '3D'],
-										image: '/assets/portfolio.png',
+										title: 'Social Media',
+										desc: '“Super Social” is a real-time networking app with features like disappearning stories, WebRTC video calls, and instant messaging. It uses Socket.IO and Prisma for a modern, fluid social experience.',
+										link: 'https://github.com/Kishor0513/Social-Media',
+										live: '#',
+										tags: ['React', 'Node.js', 'Socket.io'],
+										image: 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&q=80&w=1000',
+										className: 'md:col-span-1',
 									},
 									{
-										title: 'Web Development Projects',
-										desc: 'Collection of various web applications and experiments built during self-learning journey, featuring modern web technologies.',
-										link: 'https://github.com/Kishor0513',
-										tags: ['React', 'JavaScript', 'CSS'],
-										image: '/assets/experiments.png',
+										title: 'Weavers',
+										desc: 'A comprehensive PHP-based E-commerce platform. It features full cart functionality, secure checkout, and back-office management, showcasing the power of traditional web stacks for scalable retail.',
+										link: 'https://github.com/Kishor0513/Weavers',
+										live: '#',
+										tags: ['PHP', 'MySQL', 'Ecommerce'],
+										image: 'https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&q=80&w=1000',
+										className: 'md:col-span-1',
+									},
+									{
+										title: 'Dahlia Classification (FYP)',
+										desc: 'My Final Year Project: An AI-driven application that classifies Dahlia flower types using a pre-trained VGG16 CNN model. This Flask web app provides high-confidence results by analyzing flower image data in real-time.',
+										link: 'https://github.com/Kishor0513/App',
+										live: '#',
+										tags: ['Python', 'CNN', 'Deep Learning'],
+										image: 'https://images.unsplash.com/photo-1626808642875-0aa545452fe8?auto=format&fit=crop&q=80&w=1000',
+										className: 'md:col-span-1',
+									},
+									{
+										title: 'Personal Blog',
+										desc: 'A minimal, blazingly fast personal blog designed for performance and reading comfort. It serves as my primary space for sharing engineering insights and tutorials with the development community.',
+										link: 'https://github.com/Kishor0513/Blog',
+										live: '#',
+										tags: ['Next.js', 'Vercel', 'Blog'],
+										image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=1000',
+										className: 'md:col-span-1 lg:col-span-1',
 									},
 								].map((project, i) => (
 									<motion.div
 										key={i}
-										whileHover={{ y: -10 }}
+										whileHover={{ y: -5, scale: 1.01 }}
 										viewport={{ once: true }}
-										className="glass-card overflow-hidden group hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300 transform liquid-glass"
+										className={`glass-card overflow-hidden group hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500 transform liquid-glass flex flex-col rounded-[2rem] border border-white/10 bg-white/5 backdrop-blur-2xl ${project.className || ''}`}
 									>
-										<div className="aspect-[4/3] bg-gradient-to-br from-gray-900 to-black relative overflow-hidden">
+										<div className={`relative overflow-hidden w-full ${project.className?.includes('md:col-span-2') ? 'h-[320px]' : 'h-[220px]'}`}>
 											<img
 												src={project.image}
 												alt={project.title}
-												className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-110 transition-all duration-500"
+												className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
 											/>
-											<div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-											<div className="absolute top-4 right-4 p-2 bg-black/50 backdrop-blur rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
-												<ExternalLink size={16} />
+											<div className="absolute inset-0 bg-gradient-to-t from-[#0f0518] via-transparent to-transparent opacity-90" />
+											<div className="absolute top-4 right-4 p-2 bg-black/50 backdrop-blur-md rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+												<ExternalLink size={16} className="text-white" />
 											</div>
 										</div>
-										<div className="p-8">
-											<div className="flex gap-2 mb-4">
-												{project.tags.map((tag) => (
-													<span
-														key={tag}
-														className="px-2 py-1 text-xs font-medium rounded-md bg-white/5 text-gray-300 border border-white/5"
-													>
-														{tag}
-													</span>
-												))}
+										<div className="p-5 flex flex-col">
+											<div>
+												<div className="flex flex-wrap gap-2 mb-3">
+													{project.tags.map((tag) => (
+														<span
+															key={tag}
+															className="px-3 py-1 text-[10px] font-bold uppercase tracking-wider rounded-full bg-white/10 text-gray-200 border border-white/5 backdrop-blur-md"
+														>
+															{tag}
+														</span>
+													))}
+												</div>
+												<h3 className="text-xl font-bold text-white mb-2 tracking-tight">
+													{project.title}
+												</h3>
+												<p className="text-gray-400 text-sm leading-relaxed line-clamp-2 md:line-clamp-none">{project.desc}</p>
 											</div>
-											<h3 className="text-2xl font-bold text-white mb-2">
-												{project.title}
-											</h3>
-											<p className="mb-6 text-gray-400">{project.desc}</p>
-											<a
-												href={project.link}
-												target="_blank"
-												className="flex items-center gap-2 text-sm font-medium text-primary hover:text-white transition-colors"
-											>
-												View Code{' '}
-												<span className="transition-transform group-hover:translate-x-1">
-													→
-												</span>
-											</a>
+											<div className="flex items-center gap-4 mt-4">
+												<a
+													href={project.link}
+													target="_blank"
+													rel="noreferrer"
+													className="flex items-center justify-center gap-2 text-sm font-semibold text-white hover:text-white transition-all bg-white/10 hover:bg-white/20 px-5 py-2.5 rounded-xl backdrop-blur-md border border-white/5"
+												>
+													View Code
+												</a>
+												{project.live !== '#' && (
+													<a
+														href={project.live}
+														target="_blank"
+														rel="noreferrer"
+														className="flex items-center justify-center gap-2 text-sm font-semibold text-primary/90 hover:text-primary transition-colors hover:bg-primary/10 px-5 py-2.5 rounded-xl"
+													>
+														Live View <ExternalLink size={14} />
+													</a>
+												)}
+											</div>
 										</div>
 									</motion.div>
 								))}
