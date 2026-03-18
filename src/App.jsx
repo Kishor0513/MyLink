@@ -353,15 +353,15 @@ function App() {
 										image: 'https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&q=80&w=1000',
 										className: 'md:col-span-1',
 									},
-									{
-										title: 'Dahlia Classification (FYP)',
-										desc: 'My Final Year Project: An AI-driven application that classifies Dahlia flower types using a pre-trained VGG16 CNN model. This Flask web app provides high-confidence results by analyzing flower image data in real-time.',
-										link: 'https://github.com/Kishor0513/App',
-										live: '#',
-										tags: ['Python', 'CNN', 'Deep Learning'],
-										image: 'https://images.unsplash.com/photo-1626808642875-0aa545452fe8?auto=format&fit=crop&q=80&w=1000',
-										className: 'md:col-span-1',
-									},
+										{
+											title: 'Dahlia Classification (FYP)',
+											desc: 'My Final Year Project: An AI-driven application that classifies Dahlia flower types using a pre-trained VGG16 CNN model. This Flask web app provides high-confidence results by analyzing flower image data in real-time.',
+											link: 'https://github.com/Kishor0513/App',
+											live: '#',
+											tags: ['Python', 'CNN', 'Deep Learning'],
+											image: '/assets/dahlia_classification.svg',
+											className: 'md:col-span-1',
+										},
 									{
 										title: 'Personal Blog',
 										desc: 'A minimal, blazingly fast personal blog designed for performance and reading comfort. It serves as my primary space for sharing engineering insights and tutorials with the development community.',
@@ -378,16 +378,22 @@ function App() {
 										viewport={{ once: true }}
 										className={`glass-card overflow-hidden group hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500 transform liquid-glass flex flex-col rounded-[2rem] border border-white/10 bg-white/5 backdrop-blur-2xl ${project.className || ''}`}
 									>
-										<div className={`relative overflow-hidden w-full ${project.className?.includes('md:col-span-2') ? 'h-[320px]' : 'h-[220px]'}`}>
-											<img
-												src={project.image}
-												alt={project.title}
-												className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
-											/>
-											<div className="absolute inset-0 bg-gradient-to-t from-[#0f0518] via-transparent to-transparent opacity-90" />
-											<div className="absolute top-4 right-4 p-2 bg-black/50 backdrop-blur-md rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-												<ExternalLink size={16} className="text-white" />
-											</div>
+											<div className={`relative overflow-hidden w-full ${project.className?.includes('md:col-span-2') ? 'h-[320px]' : 'h-[220px]'}`}>
+												<img
+													src={project.image}
+													alt={project.title}
+													loading="lazy"
+													decoding="async"
+													onError={(e) => {
+														e.currentTarget.onerror = null;
+														e.currentTarget.src = '/assets/portfolio.png';
+													}}
+													className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
+												/>
+												<div className="absolute inset-0 bg-gradient-to-t from-[#0f0518] via-transparent to-transparent opacity-90" />
+												<div className="absolute top-4 right-4 p-2 bg-black/50 backdrop-blur-md rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+													<ExternalLink size={16} className="text-white" />
+												</div>
 										</div>
 										<div className="p-5 flex flex-col">
 											<div>
