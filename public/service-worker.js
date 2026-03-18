@@ -1,5 +1,14 @@
 // Service Worker for Kishor Portfolio
-const CACHE_NAME = 'kishor-portfolio-v2026-03-16';
+const CACHE_PREFIX = 'kishor-portfolio-';
+const cacheVersion = (() => {
+	try {
+		const url = new URL(self.location.href);
+		return url.searchParams.get('v') || 'dev';
+	} catch {
+		return 'dev';
+	}
+})();
+const CACHE_NAME = `${CACHE_PREFIX}${cacheVersion}`;
 const urlsToCache = [
 	'/',
 	'/index.html',
@@ -22,6 +31,9 @@ self.addEventListener('fetch', (event) => {
 		event.respondWith(
 			fetch(event.request)
 				.then((response) => {
+					if (!response || !response.ok) {
+						return response;
+					}
 					const responseClone = response.clone();
 					caches
 						.open(CACHE_NAME)
@@ -46,12 +58,11 @@ self.addEventListener('fetch', (event) => {
 
 // Activate and clean up old caches
 self.addEventListener('activate', (event) => {
-	const cacheWhitelist = [CACHE_NAME];
 	event.waitUntil(
 		caches.keys().then((cacheNames) => {
 			return Promise.all(
 				cacheNames.map((cacheName) => {
-					if (cacheWhitelist.indexOf(cacheName) === -1) {
+					if (cacheName.startsWith(CACHE_PREFIX) && cacheName !== CACHE_NAME) {
 						return caches.delete(cacheName);
 					}
 				}),

@@ -3,7 +3,11 @@ import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
 import './index.css';
 
-const SW_MIGRATION_KEY = 'sw-migration-2026-03-16';
+// Injected at build time by Vite `define` in `vite.config.js`.
+// eslint-disable-next-line no-undef
+const BUILD_ID = typeof __BUILD_ID__ !== 'undefined' ? __BUILD_ID__ : 'dev';
+const SW_VERSION = BUILD_ID;
+const SW_MIGRATION_KEY = `sw-migration-${SW_VERSION}`;
 
 async function runServiceWorkerMigration() {
 	if (!('serviceWorker' in navigator) || !('caches' in window)) {
@@ -42,9 +46,12 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 if ('serviceWorker' in navigator) {
 	window.addEventListener('load', () => {
 		navigator.serviceWorker
-			.register('/service-worker.js?v=2026-03-16-2', { updateViaCache: 'none' })
+			.register(`/service-worker.js?v=${encodeURIComponent(SW_VERSION)}`, {
+				updateViaCache: 'none',
+			})
 			.then((registration) => {
 				console.log('Service Worker registered:', registration);
+				registration.update().catch(() => {});
 			})
 			.catch((error) => {
 				console.log('Service Worker registration failed:', error);

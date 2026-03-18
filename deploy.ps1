@@ -27,4 +27,4 @@ Write-Host "📂 Copying built files to root..." -ForegroundColor Gray
 Copy-Item -Path "dist\*" -Destination "." -Recurse -Force
 
 Write-Host "✅ Deployment successful! Built files copied to root." -ForegroundColor Green
-Write-Host "💡 Note: index.html in root is now the BUILT version. To continue developing with 'npm run dev', you might need to restore the source index.html or Vite might handle it." -ForegroundColor Yellow
+Write-Host "💡 Note: Dev/build uses src/index.html (Vite root is src). Root index.html is safe to overwrite for GitHub Pages." -ForegroundColor Yellow
