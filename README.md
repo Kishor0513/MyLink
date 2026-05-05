@@ -29,8 +29,8 @@ A modern, interactive portfolio website showcasing my work as a Senior Full Stac
 ## 📦 Installation & Setup
 
 ### Prerequisites
-- Node.js (v18 or higher)
-- npm or yarn
+- Node.js (`^20.19.0` or `>=22.12.0`)
+- npm `11.6.2` (declared in `packageManager`)
 
 ### Installation
 
@@ -42,7 +42,7 @@ cd My-Portfolio
 
 2. Install dependencies:
 ```bash
-npm install
+npm ci
 ```
 
 3. Run the development server:
@@ -59,6 +59,22 @@ npm run build
 ```bash
 npm run preview
 ```
+
+### Dependency Maintenance
+
+Use the pinned npm version from `packageManager` before touching dependencies:
+```bash
+corepack enable
+corepack prepare npm@11.6.2 --activate
+```
+
+Keep lockfile-only refreshes separate from dependency bumps:
+```bash
+npm run lockfile:refresh
+npm run deps:bump
+```
+
+Run `npm run lockfile:refresh` when `package.json` already has the intended dependency changes and the lockfile only needs to be regenerated. Use `npm run deps:bump` for an intentional dependency update, and review the resulting `package.json` and `package-lock.json` changes together.
 
 ## 📂 Project Structure
 
