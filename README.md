@@ -25,7 +25,7 @@ Hard refresh the site first. If it still looks stale, clear site data for the do
 - **Frontend Framework**: React 18
 - **Build Tool**: Vite
 - **Styling**: Tailwind CSS
-- **3D Graphics**: 
+- **3D Graphics**:
   - Three.js
   - React Three Fiber (@react-three/fiber)
   - React Three Drei (@react-three/drei)
@@ -37,33 +37,39 @@ Hard refresh the site first. If it still looks stale, clear site data for the do
 ## 📦 Installation & Setup
 
 ### Prerequisites
+
 - Node.js (`^20.19.0` or `>=22.12.0`)
 - npm `11.6.2` (declared in `packageManager`)
 
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/Kishor0513/My-Portfolio.git
 cd My-Portfolio
 ```
 
 2. Install dependencies:
+
 ```bash
 npm ci
 ```
 
 3. Run the development server:
+
 ```bash
 npm run dev
 ```
 
 4. Build for production:
+
 ```bash
 npm run build
 ```
 
 5. Preview production build:
+
 ```bash
 npm run preview
 ```
@@ -75,6 +81,7 @@ This project is built from the Vite source in `src/` and outputs a production bu
 To publish a new version:
 
 1. Build the site:
+
 ```bash
 npm run build
 ```
@@ -88,12 +95,14 @@ For the included GitHub Pages workflow, see `deploy.ps1`, which builds the proje
 ### Dependency Maintenance
 
 Use the pinned npm version from `packageManager` before touching dependencies:
+
 ```bash
 corepack enable
 corepack prepare npm@11.6.2 --activate
 ```
 
 Keep lockfile-only refreshes separate from dependency bumps:
+
 ```bash
 npm run lockfile:refresh
 npm run deps:bump
