@@ -1,8 +1,16 @@
 # Kishor Chaudhary - Portfolio Website
 
-A modern, interactive portfolio website showcasing my work as a Senior Full Stack Engineer. Built with cutting-edge web technologies and featuring stunning 3D visuals.
+A modern, interactive portfolio website showcasing my work as a Full Stack Developer. Built with React, Vite, Tailwind CSS, and motion-driven visuals.
 
 🌐 **Live Site**: [kishorchaudhary.com.np](https://www.kishorchaudhary.com.np)
+
+If the live site still shows an older version after a push, it is usually one of these:
+
+- The production build in `dist/` was not redeployed.
+- The browser is serving a cached service worker version.
+- The hosting provider or CDN has not refreshed yet.
+
+Hard refresh the site first. If it still looks stale, clear site data for the domain or redeploy the generated `dist/` output.
 
 ## 🚀 Features
 
@@ -60,6 +68,23 @@ npm run build
 npm run preview
 ```
 
+## 🚀 Deployment
+
+This project is built from the Vite source in `src/` and outputs a production build to `dist/`.
+
+To publish a new version:
+
+1. Build the site:
+```bash
+npm run build
+```
+
+2. Deploy the generated files from `dist/` to the hosting target.
+
+3. If the site still shows an older version, clear the browser cache or site data. The app registers a service worker and can keep an older build until the new cache version is picked up.
+
+For the included GitHub Pages workflow, see `deploy.ps1`, which builds the project and copies the production output to the repository root.
+
 ### Dependency Maintenance
 
 Use the pinned npm version from `packageManager` before touching dependencies:
@@ -94,7 +119,7 @@ Run `npm run lockfile:refresh` when `package.json` already has the intended depe
 
 ## 🎨 Design Philosophy
 
-This portfolio combines modern web technologies with artistic 3D design to create an immersive user experience. The color scheme features purple and blue gradients, representing creativity and professionalism.
+This portfolio combines modern web technologies with artistic 3D design to create an immersive user experience. The color scheme uses deep dark backgrounds with lavender and pink accents to keep the UI readable and expressive.
 
 ## 📧 Contact
 
