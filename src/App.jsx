@@ -3,26 +3,27 @@ import { AnimatePresence, motion } from 'framer-motion';
 import {
 	ArrowRight,
 	ArrowUp,
-	Code2,
 	Cpu,
 	ExternalLink,
+	Github,
 	Globe,
+	Instagram,
+	Linkedin,
+	Mail,
 	Server,
 } from 'lucide-react';
 import { Suspense, useRef, useState } from 'react';
 import Hero3D from './components/canvas/Hero3D';
 import ErrorBoundary from './components/ui/ErrorBoundary';
+import GitHubStats from './components/ui/GitHubStats';
 import Navbar from './components/ui/Navbar';
-import Sidebar from './components/ui/Sidebar';
-import QRCodeModal from './components/ui/QRCodeModal';
-import Reviews from './components/ui/Reviews';
 import ShootingStars from './components/ui/ShootingStars';
+import SpaceBackground from './components/ui/SpaceBackground';
 import Timeline from './components/ui/Timeline';
 
 function App() {
-	const [isQRModalOpen, setIsQRModalOpen] = useState(false);
 	const [isSending, setIsSending] = useState(false);
-	const [submitStatus, setSubmitStatus] = useState(null); // 'success', 'error', or null
+	const [submitStatus, setSubmitStatus] = useState(null);
 	const formRef = useRef();
 
 	// Animation variants
@@ -34,10 +35,10 @@ function App() {
 	return (
 		<ErrorBoundary>
 			<div className="bg-dark min-h-screen text-white selection:bg-primary/30 font-sans">
-				<Navbar onOpenQR={() => setIsQRModalOpen(true)} />
-				<Sidebar />
+				<Navbar />
 
 				<div className="fixed inset-0 z-0 pointer-events-none">
+					<SpaceBackground />
 					<ShootingStars />
 					<Suspense
 						fallback={
@@ -63,133 +64,137 @@ function App() {
 						<div className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[120px] pointer-events-none animate-pulse" />
 						<div className="absolute -bottom-[10%] -right-[10%] w-[40%] h-[40%] bg-secondary/10 rounded-full blur-[120px] pointer-events-none animate-pulse" />
 
-						<div className="relative z-10 max-w-7xl mx-auto w-full grid md:grid-cols-2 gap-12 items-center">
+						<div className="relative z-10 max-w-7xl mx-auto w-full">
 							<motion.div
 								initial="hidden"
 								whileInView="visible"
 								viewport={{ once: true }}
 								variants={fadeIn}
-								className="text-left"
+								className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8"
 							>
-								<motion.div
-									whileHover={{
-										scale: 1.05,
-										boxShadow: '0 0 25px rgba(167, 139, 250, 0.3)',
-									}}
-									className="inline-block px-4 py-1.5 mb-6 ios-glass rounded-full bg-primary/10 font-mono text-base text-primary cursor-default"
-								>
-									&lt;Dev_Mode active={'true'} /&gt;
-								</motion.div>
-								<h1 className="text-6xl md:text-8xl font-bold tracking-tight mb-6 leading-[1.1]">
-									<motion.span
-										whileHover={{ x: 10, scale: 1.02 }}
-										className="block text-white cursor-default transition-colors hover:text-primary/90"
-									>
-										Kishor
-									</motion.span>
-									<motion.span
-										whileHover={{ x: 10, scale: 1.02 }}
-										className="block running-gradient pb-2 cursor-default"
-									>
-										Chaudhary
-									</motion.span>
-								</h1>
-								<motion.h2
-									whileHover={{ x: 5, scale: 1.02 }}
-									className="text-3xl md:text-4xl text-gray-300 mb-8 font-light cursor-default"
-								>
-									<span className="text-primary font-medium">
-										Full Stack Developer
-									</span>
-								</motion.h2>
-								<motion.p
-									whileHover={{ scale: 1.01 }}
-									className="text-lg text-gray-400 mb-10 max-w-lg leading-relaxed cursor-default"
-								>
-									Specialized in architecting high-performance E-commerce platforms
-									and immersive digital experiences. I lead technical initiatives to build
-									scalable, full-stack solutions that merge creative design with
-									robust engineering.
-								</motion.p>
-								<div className="flex flex-wrap gap-5">
-									<motion.a
-										href="#projects"
-										whileHover={{ scale: 1.05 }}
-										whileTap={{ scale: 0.95 }}
-										className="group relative px-10 py-5 bg-white/5 backdrop-blur-xl border border-white/20 text-white font-bold rounded-full overflow-hidden transition-all shadow-lg shadow-primary/20 hover:bg-dark/80 liquid-glass"
-										style={{
-											display: 'inline-flex',
-											alignItems: 'center',
-											gap: '0.75rem',
+								{/* Left - Content */}
+								<div className="text-left max-w-2xl">
+									<motion.div
+										whileHover={{
+											scale: 1.05,
+											boxShadow: '0 0 25px rgba(167, 139, 250, 0.3)',
 										}}
+										className="inline-block px-4 py-1.5 mb-6 ios-glass rounded-full bg-primary/10 font-mono text-base text-primary cursor-default"
 									>
-										<span className="relative z-10">See My Work</span>
+										&lt;Dev_Mode active={'true'} /&gt;
+									</motion.div>
+									<h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 leading-[1.1]">
 										<motion.span
-											animate={{ y: [0, 5, 0] }}
-											transition={{
-												duration: 2,
-												repeat: Infinity,
-												ease: 'easeInOut',
-											}}
-											className="text-primary relative z-10"
+											whileHover={{ x: 10, scale: 1.02 }}
+											className="block text-white cursor-default transition-colors hover:text-primary/90"
 										>
-											<ArrowRight
-												size={20}
-												className="rotate-90"
-											/>
+											Kishor
 										</motion.span>
-									</motion.a>
-								</div>
-							</motion.div>
+										<motion.span
+											whileHover={{ x: 10, scale: 1.02 }}
+											className="block running-gradient pb-2 cursor-default"
+										>
+											Chaudhary
+										</motion.span>
+									</h1>
+									<motion.h2
+										whileHover={{ x: 5, scale: 1.02 }}
+										className="text-2xl md:text-3xl lg:text-4xl text-gray-300 mb-6 font-light cursor-default"
+									>
+										<span className="text-primary font-medium">
+											Full Stack Developer
+										</span>
+									</motion.h2>
+									<motion.p
+										whileHover={{ scale: 1.01 }}
+										className="text-base md:text-lg text-gray-400 mb-8 max-w-xl leading-relaxed"
+									>
+										Specialized in architecting high-performance E-commerce
+										platforms and immersive digital experiences. Building
+										full-stack solutions that merge creative design with robust
+										engineering.
+									</motion.p>
 
-							{/* Anime Panda Hero Image */}
-							<motion.div
-								initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
-								whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-								transition={{ duration: 1, delay: 0.2 }}
-								className="hidden md:flex relative w-full items-center justify-center p-8"
-							>
-								<div className="relative w-full max-w-lg aspect-square">
-									{/* Gradient Glow Background */}
-									<div className="absolute inset-0 bg-gradient-to-tr from-primary/30 to-secondary/30 rounded-full blur-[100px] -z-10 animate-pulse"></div>
+									{/* Quick Stats */}
+									<motion.div
+										initial={{ opacity: 0 }}
+										animate={{ opacity: 1 }}
+										transition={{ delay: 0.5 }}
+										className="flex flex-wrap gap-6 mb-10"
+									>
+										{[
+											{ value: '3+', label: 'Years' },
+											{ value: '10+', label: 'Projects' },
+											{ value: '500+', label: 'Commits' },
+										].map((stat) => (
+											<div
+												key={stat.label}
+												className="text-center"
+											>
+												<div className="text-2xl font-bold text-primary">
+													{stat.value}
+												</div>
+												<div className="text-xs text-gray-500 uppercase tracking-wider">
+													{stat.label}
+												</div>
+											</div>
+										))}
+									</motion.div>
 
-									{/* Image Container */}
-									<div className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/10 glass-card p-4 transform hover:scale-105 transition-transform duration-500 liquid-glass">
-										<img
-											src="/assets/anime_coder_panda.png"
-											alt="Anime Panda Coding"
-											className="w-full h-full object-cover rounded-2xl"
-										/>
-
-										{/* Overlay Shine Effect */}
-										<div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-50 pointer-events-none rounded-2xl"></div>
+									<div className="flex flex-wrap gap-4">
+										<motion.a
+											href="#projects"
+											whileHover={{ scale: 1.05 }}
+											whileTap={{ scale: 0.95 }}
+											className="group relative px-8 py-4 bg-white/90 text-white font-bold rounded-full overflow-hidden transition-all shadow-lg shadow-primary/20 liquid-glass inline-flex items-center gap-3"
+										>
+											<span className="relative z-10">View Projects</span>
+											<motion.span
+												animate={{ y: [0, 5, 0] }}
+												transition={{
+													duration: 2,
+													repeat: Infinity,
+													ease: 'easeInOut',
+												}}
+												className="relative z-10"
+											>
+												<ArrowRight
+													size={18}
+													className="rotate-90"
+												/>
+											</motion.span>
+										</motion.a>
 									</div>
-
-									{/* Floating Tech Icons Decoration */}
-									<motion.div
-										animate={{ y: [0, -10, 0] }}
-										transition={{
-											duration: 3,
-											repeat: Infinity,
-											ease: 'easeInOut',
-										}}
-										className="absolute -top-6 -right-6 p-4 glass-panel rounded-2xl text-primary border border-primary/30 shadow-lg shadow-primary/20"
-									>
-										<Cpu size={32} />
-									</motion.div>
-									<motion.div
-										animate={{ y: [0, 10, 0] }}
-										transition={{
-											duration: 4,
-											repeat: Infinity,
-											ease: 'easeInOut',
-											delay: 1,
-										}}
-										className="absolute -bottom-6 -left-6 p-4 glass-panel rounded-2xl text-secondary border border-secondary/30 shadow-lg shadow-secondary/20"
-									>
-										<Code2 size={32} />
-									</motion.div>
 								</div>
+
+								{/* Right - Panda Image */}
+								<motion.div
+									initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
+									whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+									transition={{ duration: 1, delay: 0.2 }}
+									className="relative flex-shrink-0 hidden lg:block"
+								>
+									<div className="relative w-[480px] h-[480px] xl:w-[550px] xl:h-[550px]">
+										{/* Gradient Glow Background */}
+										<div className="absolute inset-0 bg-gradient-to-tr from-primary/30 to-secondary/30 rounded-full blur-[120px] -z-10 animate-pulse" />
+
+										{/* Image Container */}
+										<motion.div
+											whileHover={{ scale: 1.02 }}
+											transition={{ type: 'spring', stiffness: 300 }}
+											className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/10 glass-card p-4 liquid-glass w-full h-full"
+										>
+											<img
+												src="/assets/anime_coder_panda.png"
+												alt="Anime Panda Coding"
+												className="w-full h-full object-cover rounded-2xl"
+											/>
+
+											{/* Overlay Shine Effect */}
+											<div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-50 pointer-events-none rounded-2xl" />
+										</motion.div>
+									</div>
+								</motion.div>
 							</motion.div>
 						</div>
 					</section>
@@ -207,12 +212,12 @@ function App() {
 								whileInView="visible"
 								viewport={{ once: true }}
 								variants={fadeIn}
-								className="mb-16 text-center md:text-left"
+								className="text-center mb-16"
 							>
 								<h2 className="text-4xl md:text-5xl font-bold mb-4 running-gradient inline-block">
 									Technical Expertise
 								</h2>
-								<p className="text-gray-400 text-lg">
+								<p className="text-gray-400 text-lg max-w-2xl mx-auto">
 									Check out my social media and GitHub for more technical
 									projects and insights.
 								</p>
@@ -312,16 +317,13 @@ function App() {
 						className="py-32 px-6"
 					>
 						<div className="max-w-7xl mx-auto">
-							<div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-								<div>
-									<h2 className="text-4xl md:text-5xl font-bold mb-4 running-gradient inline-block">
-										Selected Work
-									</h2>
-									<p className="text-gray-400 text-lg">
-										Highlights of engineering and design.
-									</p>
-								</div>
-								<div className="h-px w-full md:w-1/2 bg-white/10 mb-2"></div>
+							<div className="text-center mb-16">
+								<h2 className="text-4xl md:text-5xl font-bold mb-4 running-gradient inline-block">
+									Selected Work
+								</h2>
+								<p className="text-gray-400 text-lg max-w-2xl mx-auto">
+									Highlights of engineering and design.
+								</p>
 							</div>
 
 							<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -341,7 +343,8 @@ function App() {
 										link: 'https://github.com/Kishor0513/Social-Media',
 										live: '#',
 										tags: ['React', 'Node.js', 'Socket.io'],
-										image: 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&q=80&w=1000',
+										image:
+											'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&q=80&w=1000',
 										className: 'md:col-span-1',
 									},
 									{
@@ -350,25 +353,27 @@ function App() {
 										link: 'https://github.com/Kishor0513/Weavers',
 										live: '#',
 										tags: ['PHP', 'MySQL', 'Ecommerce'],
-										image: 'https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&q=80&w=1000',
+										image:
+											'https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&q=80&w=1000',
 										className: 'md:col-span-1',
 									},
-										{
-											title: 'Dahlia Classification (FYP)',
-											desc: 'My Final Year Project: An AI-driven application that classifies Dahlia flower types using a pre-trained VGG16 CNN model. This Flask web app provides high-confidence results by analyzing flower image data in real-time.',
-											link: 'https://github.com/Kishor0513/App',
-											live: '#',
-											tags: ['Python', 'CNN', 'Deep Learning'],
-											image: '/assets/dahlia_classification.svg',
-											className: 'md:col-span-1',
-										},
+									{
+										title: 'Dahlia Classification (FYP)',
+										desc: 'My Final Year Project: An AI-driven application that classifies Dahlia flower types using a pre-trained VGG16 CNN model. This Flask web app provides high-confidence results by analyzing flower image data in real-time.',
+										link: 'https://github.com/Kishor0513/App',
+										live: '#',
+										tags: ['Python', 'CNN', 'Deep Learning'],
+										image: '/assets/dahlia_classification.svg',
+										className: 'md:col-span-1',
+									},
 									{
 										title: 'Personal Blog',
 										desc: 'A minimal, blazingly fast personal blog designed for performance and reading comfort. It serves as my primary space for sharing engineering insights and tutorials with the development community.',
 										link: 'https://github.com/Kishor0513/Blog',
 										live: '#',
 										tags: ['Next.js', 'Vercel', 'Blog'],
-										image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=1000',
+										image:
+											'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=1000',
 										className: 'md:col-span-1 lg:col-span-1',
 									},
 								].map((project, i) => (
@@ -378,22 +383,27 @@ function App() {
 										viewport={{ once: true }}
 										className={`glass-card overflow-hidden group hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500 transform liquid-glass flex flex-col rounded-[2rem] border border-white/10 bg-white/5 backdrop-blur-2xl ${project.className || ''}`}
 									>
-											<div className={`relative overflow-hidden w-full ${project.className?.includes('md:col-span-2') ? 'h-[320px]' : 'h-[220px]'}`}>
-												<img
-													src={project.image}
-													alt={project.title}
-													loading="lazy"
-													decoding="async"
-													onError={(e) => {
-														e.currentTarget.onerror = null;
-														e.currentTarget.src = '/assets/portfolio.png';
-													}}
-													className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
+										<div
+											className={`relative overflow-hidden w-full ${project.className?.includes('md:col-span-2') ? 'h-[320px]' : 'h-[220px]'}`}
+										>
+											<img
+												src={project.image}
+												alt={project.title}
+												loading="lazy"
+												decoding="async"
+												onError={(e) => {
+													e.currentTarget.onerror = null;
+													e.currentTarget.src = '/assets/portfolio.png';
+												}}
+												className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
+											/>
+											<div className="absolute inset-0 bg-gradient-to-t from-[#0f0518] via-transparent to-transparent opacity-90" />
+											<div className="absolute top-4 right-4 p-2 bg-black/50 backdrop-blur-md rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+												<ExternalLink
+													size={16}
+													className="text-white"
 												/>
-												<div className="absolute inset-0 bg-gradient-to-t from-[#0f0518] via-transparent to-transparent opacity-90" />
-												<div className="absolute top-4 right-4 p-2 bg-black/50 backdrop-blur-md rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-													<ExternalLink size={16} className="text-white" />
-												</div>
+											</div>
 										</div>
 										<div className="p-5 flex flex-col">
 											<div>
@@ -410,7 +420,9 @@ function App() {
 												<h3 className="text-xl font-bold text-white mb-2 tracking-tight">
 													{project.title}
 												</h3>
-												<p className="text-gray-400 text-sm leading-relaxed line-clamp-2 md:line-clamp-none">{project.desc}</p>
+												<p className="text-gray-400 text-sm leading-relaxed line-clamp-2 md:line-clamp-none">
+													{project.desc}
+												</p>
 											</div>
 											<div className="flex items-center gap-4 mt-4">
 												<a
@@ -439,217 +451,105 @@ function App() {
 						</div>
 					</section>
 
-					<Reviews />
+					<GitHubStats />
 
 					{/* Footer / Contact Section */}
 					<footer
 						id="contact"
-						className="relative pt-32 pb-16 overflow-hidden bg-dark/50 backdrop-blur-sm"
+						className="relative isolate pt-20 pb-8 overflow-hidden bg-gradient-to-b from-dark/60 via-dark/80 to-dark"
 					>
 						<div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
-						<div className="max-w-7xl mx-auto px-6 relative z-10">
-							<div className="grid lg:grid-cols-2 gap-20 items-start mb-24">
-								{/* Left Side: Developer Illustration */}
+						<div className="max-w-6xl mx-auto px-6 relative z-10">
+							<div className="grid md:grid-cols-2 gap-12 mb-16">
+								{/* Left Side: Contact Info */}
 								<motion.div
-									initial={{ opacity: 0, scale: 0.9 }}
-									whileInView={{ opacity: 1, scale: 1 }}
+									initial={{ opacity: 0, y: 20 }}
+									whileInView={{ opacity: 1, y: 0 }}
 									viewport={{ once: true }}
-									transition={{ duration: 0.6 }}
-									className="relative"
+									className="space-y-8"
 								>
-									<div className="relative w-full aspect-square max-w-md mx-auto">
-										{/* Animated Background Glow */}
-										<div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-full blur-3xl animate-pulse" />
+									<div>
+										<h2 className="text-3xl md:text-4xl font-bold mb-4 running-gradient">
+											Let's Connect
+										</h2>
+										<p className="text-gray-400 text-lg">
+											Have a project in mind or just want to chat? Feel free to
+											reach out. I'm always open to discussing new
+											opportunities.
+										</p>
+									</div>
 
-										{/* Developer SVG Illustration */}
-										<motion.div
-											animate={{
-												y: [0, -20, 0],
-												rotate: [0, 5, 0, -5, 0],
-											}}
-											transition={{
-												duration: 6,
-												repeat: Infinity,
-												ease: 'easeInOut',
-											}}
-											className="relative z-10 flex items-center justify-center"
+									<div className="space-y-4">
+										<a
+											href="mailto:kishoc2000@gmail.com"
+											className="flex items-center gap-4 text-gray-300 hover:text-primary transition-colors group"
 										>
-											<svg
-												viewBox="0 0 400 400"
-												className="w-full h-full drop-shadow-2xl"
+											<div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-primary/30 transition-colors">
+												<Mail size={20} />
+											</div>
+											<span>kishorc2000@gmail.com</span>
+										</a>
+										<div className="flex items-center gap-4 text-gray-300">
+											<div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
+												<Globe size={20} />
+											</div>
+											<span>Kathmandu, Nepal</span>
+										</div>
+									</div>
+
+									{/* Social Icons */}
+									<div className="flex gap-3">
+										{[
+											{
+												href: 'https://github.com/Kishor0513',
+												icon: Github,
+												label: 'GitHub',
+											},
+											{
+												href: 'https://www.linkedin.com/in/kishor-chaudhary-772b05314/',
+												icon: Linkedin,
+												label: 'LinkedIn',
+											},
+											{
+												href: 'https://www.instagram.com/kishor0513/',
+												icon: Instagram,
+												label: 'Instagram',
+											},
+											{
+												href: 'https://www.kishorchaudhary.com.np',
+												icon: Globe,
+												label: 'Website',
+											},
+										].map((social) => (
+											<motion.a
+												key={social.label}
+												href={social.href}
+												target="_blank"
+												rel="noopener noreferrer"
+												whileHover={{ scale: 1.1, y: -2 }}
+												className="w-12 h-12 flex items-center justify-center glass-panel rounded-xl border border-white/10 text-gray-400 hover:text-primary hover:border-primary/30 transition-all"
+												title={social.label}
 											>
-												{/* Code Editor Window */}
-												<rect
-													x="50"
-													y="80"
-													width="300"
-													height="240"
-													rx="12"
-													fill="url(#editorGradient)"
-												/>
-												<defs>
-													<linearGradient
-														id="editorGradient"
-														x1="0%"
-														y1="0%"
-														x2="0%"
-														y2="100%"
-													>
-														<stop
-															offset="0%"
-															stopColor="#1a0b2e"
-														/>
-														<stop
-															offset="100%"
-															stopColor="#0f0518"
-														/>
-													</linearGradient>
-												</defs>
-
-												{/* Window Controls */}
-												<circle
-													cx="70"
-													cy="100"
-													r="5"
-													fill="#ff5f57"
-												/>
-												<circle
-													cx="90"
-													cy="100"
-													r="5"
-													fill="#ffbd2e"
-												/>
-												<circle
-													cx="110"
-													cy="100"
-													r="5"
-													fill="#28ca42"
-												/>
-
-												{/* Code Lines */}
-												<motion.rect
-													x="70"
-													y="130"
-													width="80"
-													height="4"
-													rx="2"
-													fill="#a78bfa"
-													animate={{ opacity: [0.5, 1, 0.5] }}
-													transition={{ duration: 2, repeat: Infinity }}
-												/>
-												<rect
-													x="70"
-													y="150"
-													width="120"
-													height="4"
-													rx="2"
-													fill="#8b5cf6"
-													opacity="0.7"
-												/>
-												<rect
-													x="70"
-													y="170"
-													width="100"
-													height="4"
-													rx="2"
-													fill="#a78bfa"
-													opacity="0.6"
-												/>
-												<motion.rect
-													x="70"
-													y="190"
-													width="140"
-													height="4"
-													rx="2"
-													fill="#8b5cf6"
-													animate={{ opacity: [0.6, 1, 0.6] }}
-													transition={{ duration: 2.5, repeat: Infinity }}
-												/>
-												<rect
-													x="70"
-													y="210"
-													width="90"
-													height="4"
-													rx="2"
-													fill="#a78bfa"
-													opacity="0.7"
-												/>
-
-												{/* Floating Code Symbols */}
-												<motion.text
-													x="280"
-													y="140"
-													fontSize="24"
-													fill="#a78bfa"
-													animate={{
-														y: [140, 130, 140],
-														opacity: [0.5, 1, 0.5],
-													}}
-													transition={{ duration: 3, repeat: Infinity }}
-												>
-													{'</>'}
-												</motion.text>
-												<motion.text
-													x="260"
-													y="200"
-													fontSize="20"
-													fill="#8b5cf6"
-													animate={{
-														y: [200, 190, 200],
-														opacity: [0.5, 1, 0.5],
-													}}
-													transition={{
-														duration: 2.5,
-														repeat: Infinity,
-														delay: 0.5,
-													}}
-												>
-													{'{ }'}
-												</motion.text>
-											</svg>
-										</motion.div>
-
-										{/* Floating Tech Icons */}
-										<motion.div
-											animate={{ rotate: 360 }}
-											transition={{
-												duration: 20,
-												repeat: Infinity,
-												ease: 'linear',
-											}}
-											className="absolute inset-0"
-										>
-											<Code2
-												className="absolute top-10 left-10 text-primary"
-												size={32}
-											/>
-											<Server
-												className="absolute bottom-10 right-10 text-secondary"
-												size={32}
-											/>
-											<Cpu
-												className="absolute top-10 right-10 text-primary"
-												size={28}
-											/>
-										</motion.div>
+												<social.icon size={20} />
+											</motion.a>
+										))}
 									</div>
 								</motion.div>
 
 								{/* Right Side: Contact Form */}
 								<motion.div
-									initial={{ opacity: 0, x: 20 }}
-									whileInView={{ opacity: 1, x: 0 }}
+									initial={{ opacity: 0, y: 20 }}
+									whileInView={{ opacity: 1, y: 0 }}
 									viewport={{ once: true }}
+									transition={{ delay: 0.1 }}
 									className="relative group"
 								>
-									<div className="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-[2rem] blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200" />
-									<div className="relative p-10 overflow-hidden rounded-[2rem] bg-surface/50 border border-white/10 shadow-2xl backdrop-blur-md">
-										<div className="mb-8">
-											<h3 className="text-2xl font-bold running-gradient inline-block">
-												Send Me a Message
-											</h3>
-										</div>
+									<div className="absolute -inset-1 bg-gradient-to-r from-primary/30 to-secondary/30 rounded-2xl blur opacity-30 group-hover:opacity-50 transition duration-500" />
+									<div className="relative p-6 md:p-8 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
+										<h3 className="text-xl font-bold text-white mb-6">
+											Send a Message
+										</h3>
 										<form
 											ref={formRef}
 											onSubmit={(e) => {
@@ -662,7 +562,7 @@ function App() {
 														'service_tmldjzb',
 														'template_b748drf',
 														formRef.current,
-														'pFJE1WaB8zsqoN9Z0'
+														'pFJE1WaB8zsqoN9Z0',
 													)
 													.then(
 														() => {
@@ -673,61 +573,34 @@ function App() {
 														() => {
 															setSubmitStatus('error');
 															setIsSending(false);
-														}
+														},
 													);
 											}}
-											className="space-y-6"
+											className="space-y-4"
 										>
-											<div className="grid md:grid-cols-2 gap-6">
-												<div className="space-y-2">
-													<label
-														htmlFor="name"
-														className="text-xs font-bold uppercase tracking-widest text-gray-500 ml-1"
-													>
-														Your Name
-													</label>
-													<input
-														type="text"
-														name="user_name"
-														id="name"
-														required
-														className="w-full px-5 py-4 text-white rounded-2xl bg-white/5 border border-white/10 focus:outline-none focus:border-primary/50 transition-all placeholder-gray-600"
-														placeholder="What's your name?"
-													/>
-												</div>
-												<div className="space-y-2">
-													<label
-														htmlFor="email"
-														className="text-xs font-bold uppercase tracking-widest text-gray-500 ml-1"
-													>
-														Your Email
-													</label>
-													<input
-														type="email"
-														name="user_email"
-														id="email"
-														required
-														className="w-full px-5 py-4 text-white rounded-2xl bg-white/5 border border-white/10 focus:outline-none focus:border-primary/50 transition-all placeholder-gray-600"
-														placeholder="Your email address?"
-													/>
-												</div>
-											</div>
-											<div className="space-y-2">
-												<label
-													htmlFor="message"
-													className="text-xs font-bold uppercase tracking-widest text-gray-500 ml-1"
-												>
-													Message
-												</label>
-												<textarea
-													name="message"
-													id="message"
+											<div className="grid md:grid-cols-2 gap-4">
+												<input
+													type="text"
+													name="user_name"
 													required
-													rows="5"
-													className="w-full px-5 py-4 text-white rounded-2xl bg-white/5 border border-white/10 focus:outline-none focus:border-primary/50 transition-all placeholder-gray-600 resize-none"
-													placeholder="Tell me about your project..."
+													className="w-full px-4 py-3 text-white text-sm rounded-xl bg-white/5 border border-white/10 focus:outline-none focus:border-primary/50 transition-all placeholder-gray-500"
+													placeholder="Your Name"
+												/>
+												<input
+													type="email"
+													name="user_email"
+													required
+													className="w-full px-4 py-3 text-white text-sm rounded-xl bg-white/5 border border-white/10 focus:outline-none focus:border-primary/50 transition-all placeholder-gray-500"
+													placeholder="Your Email"
 												/>
 											</div>
+											<textarea
+												name="message"
+												required
+												rows="3"
+												className="w-full px-4 py-3 text-white text-sm rounded-xl bg-white/5 border border-white/10 focus:outline-none focus:border-primary/50 transition-all placeholder-gray-500 resize-none"
+												placeholder="Your Message"
+											/>
 
 											<AnimatePresence>
 												{submitStatus === 'success' && (
@@ -745,7 +618,7 @@ function App() {
 														animate={{ opacity: 1, y: 0 }}
 														className="text-red-400 text-sm font-medium text-center"
 													>
-														Failed to send message. Please try again or use direct email.
+														Failed to send. Please try again.
 													</motion.p>
 												)}
 											</AnimatePresence>
@@ -753,18 +626,15 @@ function App() {
 											<button
 												type="submit"
 												disabled={isSending}
-												className="w-full py-5 font-bold text-dark bg-primary rounded-2xl shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-3 disabled:opacity-50 liquid-glass"
+												className="w-full py-3.5 font-bold text-sm text-white bg-primary rounded-xl hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2 disabled:opacity-50"
 											>
 												{isSending ? (
 													<>
-														<div className="w-5 h-5 border-2 border-dark/30 border-t-dark rounded-full animate-spin" />
-														SENDING...
+														<div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+														SENDING
 													</>
 												) : (
-													<>
-														SEND MESSAGE
-														<ArrowRight size={18} />
-													</>
+													<>SEND MESSAGE</>
 												)}
 											</button>
 										</form>
@@ -772,34 +642,27 @@ function App() {
 								</motion.div>
 							</div>
 
-							<div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/5 gap-6">
-								<div className="text-center md:text-left">
-									<p className="text-gray-500 text-sm">
-										© {new Date().getFullYear()} Kishor Chaudhary. All rights reserved.
-									</p>
-									<p className="text-gray-600 text-[10px] mt-1 uppercase tracking-[0.2em]">
-										Full Stack Developer • Based in Kathmandu, Nepal
-									</p>
-								</div>
+							{/* Bottom Bar */}
+							<div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-8 border-t border-white/5">
+								<p className="text-gray-500 text-sm">
+									© {new Date().getFullYear()} Kishor Chaudhary. All rights
+									reserved.
+								</p>
 
-								<div className="flex flex-col items-center md:items-end gap-4">
-									<button
-										onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-										className="flex items-center gap-2 px-6 py-2 ios-glass rounded-full text-xs font-bold text-gray-400 hover:text-primary transition-all group tracking-widest"
-									>
-										BACK TO TOP
-										<ArrowUp size={14} className="group-hover:-translate-y-1 transition-transform" />
-									</button>
-								</div>
+								<button
+									type="button"
+									onClick={() =>
+										window.scrollTo({ top: 0, behavior: 'smooth' })
+									}
+									className="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-medium text-gray-400 hover:text-primary hover:bg-white/5 transition-all"
+								>
+									BACK TO TOP
+									<ArrowUp size={12} />
+								</button>
 							</div>
 						</div>
 					</footer>
 				</main>
-
-				<QRCodeModal
-					isOpen={isQRModalOpen}
-					onClose={() => setIsQRModalOpen(false)}
-				/>
 			</div>
 		</ErrorBoundary>
 	);

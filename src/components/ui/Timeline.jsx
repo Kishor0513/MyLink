@@ -49,17 +49,9 @@ const Timeline = () => {
 				'Managing and developing e-commerce web solutions, implementing modern web technologies for enhanced user experience and business growth.',
 		},
 		{
-			type: 'work',
-			title: 'Self-Taught Developer',
-			company: 'Personal Projects',
-			period: '2022 - Present',
-			description:
-				'Continuously learning and building web applications using React, Node.js, and modern development practices through hands-on projects and self-study.',
-		},
-		{
 			type: 'education',
 			title: 'Bachelor of Information Technology (HONS)',
-			company: 'Nilai University',
+			company: 'Nilai University, Malaysia',
 			period: '2022 - 2026',
 			description:
 				'Specialized in software development, web technologies, and modern programming practices. Developed strong foundation in computer science fundamentals.',

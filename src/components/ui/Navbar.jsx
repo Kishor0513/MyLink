@@ -1,8 +1,8 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { ArrowRight, Menu, QrCode, X } from 'lucide-react';
+import { ArrowRight, Download, Menu, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
-const Navbar = ({ onOpenQR }) => {
+const Navbar = () => {
 	const [scrolled, setScrolled] = useState(false);
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -17,7 +17,6 @@ const Navbar = ({ onOpenQR }) => {
 		{ name: 'Experience', href: '#experience' },
 		{ name: 'Skills', href: '#skills' },
 		{ name: 'Projects', href: '#projects' },
-		{ name: 'Reviews', href: '#reviews' },
 	];
 
 	return (
@@ -57,23 +56,26 @@ const Navbar = ({ onOpenQR }) => {
 					</div>
 
 					<div className="flex items-center gap-4">
-						<motion.button
-							onClick={onOpenQR}
+						<motion.a
+							href="/assets/Kishor_Chaudhary_CV.pdf"
+							target="_blank"
+							rel="noopener noreferrer"
 							whileHover={{ scale: 1.05 }}
 							whileTap={{ scale: 0.95 }}
-							className="p-2.5 bg-white/5 hover:bg-white/10 rounded-full border border-white/10 transition-all text-primary liquid-glass"
+							className="p-2.5 bg-white/5 hover:bg-white/10 rounded-full border border-white/10 transition-all text-primary liquid-glass flex items-center gap-2"
 						>
-							<QrCode size={20} />
-						</motion.button>
+							<Download size={18} />
+							<span className="text-sm font-semibold">Resume</span>
+						</motion.a>
 
 						<motion.a
 							href="#contact"
 							whileHover={{ scale: 1.05 }}
 							whileTap={{ scale: 0.95 }}
-							className="px-6 py-2.5 bg-primary text-dark font-bold rounded-full text-sm flex items-center gap-2 group shadow-lg shadow-primary/20 liquid-glass"
+							className="px-6 py-2.5 bg-primary text-white font-bold rounded-full text-sm flex items-center gap-2 group shadow-lg shadow-primary/20 liquid-glass"
 							style={{ fontFamily: 'Outfit, Inter, system-ui, sans-serif' }}
 						>
-							Hire Me
+							Let's Talk
 							<ArrowRight
 								size={16}
 								className="group-hover:translate-x-1 transition-transform"
@@ -124,19 +126,19 @@ const Navbar = ({ onOpenQR }) => {
 							</motion.a>
 						))}
 
-						<motion.button
+						<motion.a
+							href="/assets/Kishor_Chaudhary_CV.pdf"
+							target="_blank"
+							rel="noopener noreferrer"
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ delay: 0.6 }}
-							onClick={() => {
-								onOpenQR();
-								setMobileMenuOpen(false);
-							}}
-							className="mt-4 px-10 py-4 bg-primary text-dark font-bold rounded-full text-xl liquid-glass"
+							className="mt-4 px-10 py-4 bg-primary text-dark font-bold rounded-full text-xl liquid-glass flex items-center gap-3"
 							style={{ fontFamily: 'Outfit, Inter, system-ui, sans-serif' }}
 						>
-							Open QR Code
-						</motion.button>
+							<Download size={20} />
+							Download CV
+						</motion.a>
 					</motion.div>
 				)}
 			</AnimatePresence>
