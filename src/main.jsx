@@ -8,6 +8,10 @@ import './index.css';
 const BUILD_ID = typeof __BUILD_ID__ !== 'undefined' ? __BUILD_ID__ : 'dev';
 const SW_VERSION = BUILD_ID;
 const SW_MIGRATION_KEY = `sw-migration-${SW_VERSION}`;
+const IS_LOCALHOST =
+	window.location.hostname === 'localhost' ||
+	window.location.hostname === '127.0.0.1' ||
+	window.location.hostname === '::1';
 
 async function runServiceWorkerMigration() {
 	if (!('serviceWorker' in navigator) || !('caches' in window)) {
@@ -35,6 +39,15 @@ async function runServiceWorkerMigration() {
 
 runServiceWorkerMigration();
 
+// Avoid stale cache confusion while developing locally.
+if (IS_LOCALHOST && 'serviceWorker' in navigator) {
+	navigator.serviceWorker.getRegistrations().then((registrations) => {
+		registrations.forEach((registration) => {
+			registration.unregister();
+		});
+	});
+}
+
 console.log('App mounting...');
 ReactDOM.createRoot(document.getElementById('root')).render(
 	<React.StrictMode>
@@ -43,7 +56,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 );
 
 // Register Service Worker for PWA
-if ('serviceWorker' in navigator) {
+if ('serviceWorker' in navigator && !IS_LOCALHOST) {
 	window.addEventListener('load', () => {
 		navigator.serviceWorker
 			.register(`/service-worker.js?v=${encodeURIComponent(SW_VERSION)}`, {
