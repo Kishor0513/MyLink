@@ -24,27 +24,6 @@ const Timeline = lazy(() => import('./components/ui/Timeline'));
 const Hero3D = lazy(() => import('./components/canvas/Hero3D'));
 const GitHubStats = lazy(() => import('./components/ui/GitHubStats'));
 
-const useLoadOnInteraction = () => {
-	const [hasInteracted, setHasInteracted] = useState(false);
-
-	useEffect(() => {
-		const load = () => setHasInteracted(true);
-		const events = ['pointerdown', 'keydown', 'touchstart'];
-		events.forEach((event) =>
-			window.addEventListener(event, load, {
-				once: true,
-				passive: true,
-			}),
-		);
-
-		return () => {
-			events.forEach((event) => window.removeEventListener(event, load));
-		};
-	}, []);
-
-	return hasInteracted;
-};
-
 const useMediaQuery = (query) => {
 	const [matches, setMatches] = useState(false);
 
@@ -99,8 +78,15 @@ function App() {
 	const [isSending, setIsSending] = useState(false);
 	const [submitStatus, setSubmitStatus] = useState(null);
 	const formRef = useRef();
-	const shouldRenderHero3D = useLoadOnInteraction();
 	const isLargeScreen = useMediaQuery('(min-width: 1024px)');
+
+	useEffect(() => {
+		if (isLargeScreen) {
+			// Start fetching the 3D chunk as soon as possible on large screens.
+			import('./components/canvas/Hero3D');
+		}
+	}, [isLargeScreen]);
+
 	const pathname =
 		typeof window !== 'undefined'
 			? window.location.pathname.replace(/\/+$/, '') || '/'
@@ -131,7 +117,7 @@ function App() {
 						<SpaceBackground />
 						<ShootingStars />
 					</Suspense>
-					{shouldRenderHero3D && (
+					{isLargeScreen && (
 						<Suspense fallback={null}>
 							<Hero3D />
 						</Suspense>
