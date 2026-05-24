@@ -1,0 +1,301 @@
+import { motion } from 'framer-motion';
+import { ArrowLeft, Calendar, Clock, Tag } from 'lucide-react';
+import {
+	blogIndexPath,
+	blogPosts,
+	buildBlogArticleJsonLd,
+	getBlogPostBySlug,
+} from '../../data/blogPosts';
+import { buildAbsoluteUrl, SITE_NAME } from '../../data/site';
+import SeoHead from '../ui/SeoHead';
+
+const pageFade = {
+	hidden: { opacity: 0, y: 16 },
+	visible: { opacity: 1, y: 0, transition: { duration: 0.45 } },
+};
+
+const formatDate = (value) =>
+	new Intl.DateTimeFormat('en', {
+		month: 'short',
+		day: 'numeric',
+		year: 'numeric',
+	}).format(new Date(value));
+
+const BlogHeader = () => (
+	<header className="sticky top-0 z-30 border-b border-white/10 bg-[#0f0518]/85 backdrop-blur-xl">
+		<div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+			<a
+				href="/"
+				className="text-xl font-bold tracking-tight text-white"
+			>
+				Kishor<span className="text-primary">.dev</span>
+			</a>
+			<nav className="flex items-center gap-4 text-sm text-gray-300">
+				<a
+					href="/"
+					className="transition-colors hover:text-white"
+				>
+					Home
+				</a>
+				<a
+					href={blogIndexPath}
+					className="rounded-full bg-white/10 px-4 py-2 font-semibold text-white transition-colors hover:bg-white/15"
+				>
+					Blog
+				</a>
+			</nav>
+		</div>
+	</header>
+);
+
+const BlogShell = ({ children }) => (
+	<div className="min-h-screen bg-dark text-white selection:bg-primary/30">
+		<div className="pointer-events-none fixed inset-0 z-0 bg-[radial-gradient(circle_at_top_left,rgba(167,139,250,0.12),transparent_30%),radial-gradient(circle_at_top_right,rgba(236,72,153,0.1),transparent_24%),linear-gradient(180deg,#14081f_0%,#0f0518_48%,#09030f_100%)]" />
+		<div className="relative z-10">
+			<BlogHeader />
+			{children}
+		</div>
+	</div>
+);
+
+export const BlogIndexPage = ({ posts = blogPosts }) => {
+	const postsToRender = posts;
+	const title = `${SITE_NAME} Blog | SEO, React, and Portfolio Notes`;
+	const description =
+		'A lightweight blog covering SEO, sitemap strategy, React portfolio planning, and performance notes from the Kishor Chaudhary site.';
+	const canonicalUrl = buildAbsoluteUrl(blogIndexPath);
+
+	return (
+		<BlogShell>
+			<SeoHead
+				title={title}
+				description={description}
+				canonicalUrl={canonicalUrl}
+				type="website"
+				jsonLd={{
+					'@context': 'https://schema.org',
+					'@type': 'Blog',
+					name: `${SITE_NAME} Blog`,
+					url: canonicalUrl,
+					description,
+				}}
+			/>
+			<main className="mx-auto max-w-6xl px-6 py-16 lg:py-20">
+				<motion.section
+					initial="hidden"
+					animate="visible"
+					variants={pageFade}
+					className="mb-14 grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-end"
+				>
+					<div>
+						<p className="mb-4 inline-flex rounded-full border border-primary/20 bg-primary/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-primary">
+							Blog
+						</p>
+						<h1 className="max-w-3xl text-4xl font-bold tracking-tight md:text-6xl">
+							SEO, performance, and portfolio notes that are meant to be
+							indexed.
+						</h1>
+						<p className="mt-5 max-w-2xl text-lg leading-relaxed text-gray-300">
+							These articles are written to support the site structure as much
+							as the reader. The same URLs listed here appear in the sitemap and
+							on the homepage, so crawlers and users see the same content map.
+						</p>
+					</div>
+					<div className="rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-2xl shadow-primary/10 backdrop-blur-xl">
+						<p className="text-sm uppercase tracking-[0.35em] text-gray-400">
+							What this blog covers
+						</p>
+						<div className="mt-4 space-y-4 text-gray-300">
+							<p>Practical SEO structure for React and static sites.</p>
+							<p>Clean sitemap and robots workflows for small projects.</p>
+							<p>Performance guidance that keeps visual portfolios fast.</p>
+						</div>
+					</div>
+				</motion.section>
+
+				<section className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+					{postsToRender.map((post, index) => (
+						<motion.article
+							key={post.slug}
+							initial={{ opacity: 0, y: 24 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							viewport={{ once: true }}
+							transition={{ delay: index * 0.08 }}
+							className="group flex h-full flex-col overflow-hidden rounded-[1.8rem] border border-white/10 bg-white/5 backdrop-blur-xl transition-transform duration-300 hover:-translate-y-1 hover:border-primary/30"
+						>
+							<div className="flex-1 p-6">
+								<div className="flex items-center gap-3 text-xs uppercase tracking-[0.25em] text-primary">
+									<Tag size={14} />
+									<span>{post.category}</span>
+								</div>
+								<h2 className="mt-4 text-2xl font-bold tracking-tight text-white transition-colors group-hover:text-primary">
+									{post.title}
+								</h2>
+								<p className="mt-3 text-sm leading-relaxed text-gray-300">
+									{post.excerpt}
+								</p>
+								<div className="mt-5 flex flex-wrap gap-2">
+									{(post.tags || []).map((tag) => (
+										<span
+											key={tag}
+											className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-gray-300"
+										>
+											{tag}
+										</span>
+									))}
+								</div>
+							</div>
+							<div className="border-t border-white/10 p-6 text-sm text-gray-400">
+								<div className="flex items-center justify-between gap-4">
+									<span className="inline-flex items-center gap-2">
+										<Calendar size={14} />
+										{formatDate(post.publishedAt)}
+									</span>
+									<span className="inline-flex items-center gap-2">
+										<Clock size={14} />
+										{post.readingTime}
+									</span>
+								</div>
+								<a
+									href={post.path}
+									className="mt-5 inline-flex items-center gap-2 font-semibold text-primary transition-transform duration-300 group-hover:translate-x-1"
+								>
+									Read article{' '}
+									<ArrowLeft
+										className="rotate-180"
+										size={14}
+									/>
+								</a>
+							</div>
+						</motion.article>
+					))}
+				</section>
+			</main>
+		</BlogShell>
+	);
+};
+
+export const BlogPostPage = ({ post, posts = blogPosts }) => {
+	const currentPost = post?.slug ? getBlogPostBySlug(post.slug) : post;
+	const allPosts = posts;
+
+	if (!currentPost) {
+		return <BlogIndexPage posts={allPosts} />;
+	}
+
+	const canonicalUrl = buildAbsoluteUrl(currentPost.path);
+	const title = `${currentPost.title} | ${SITE_NAME}`;
+	const description = currentPost.description;
+	const relatedPosts = allPosts
+		.filter((item) => item.slug !== currentPost.slug)
+		.slice(0, 3);
+
+	return (
+		<BlogShell>
+			<SeoHead
+				title={title}
+				description={description}
+				canonicalUrl={canonicalUrl}
+				type="article"
+				jsonLd={[
+					{
+						'@context': 'https://schema.org',
+						'@type': 'BreadcrumbList',
+						itemListElement: [
+							{
+								'@type': 'ListItem',
+								position: 1,
+								name: 'Home',
+								item: buildAbsoluteUrl('/'),
+							},
+							{
+								'@type': 'ListItem',
+								position: 2,
+								name: 'Blog',
+								item: buildAbsoluteUrl(blogIndexPath),
+							},
+							{
+								'@type': 'ListItem',
+								position: 3,
+								name: currentPost.title,
+								item: canonicalUrl,
+							},
+						],
+					},
+					buildBlogArticleJsonLd(currentPost),
+				]}
+			/>
+			<main className="mx-auto max-w-4xl px-6 py-14 lg:py-20">
+				<motion.article
+					initial="hidden"
+					animate="visible"
+					variants={pageFade}
+					className="rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-2xl shadow-primary/10 backdrop-blur-xl md:p-10"
+				>
+					<div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.28em] text-primary">
+						<span className="rounded-full border border-primary/20 bg-primary/10 px-3 py-1">
+							{currentPost.category}
+						</span>
+						<span className="inline-flex items-center gap-2 text-gray-400">
+							<Calendar size={14} />
+							{formatDate(currentPost.publishedAt)}
+						</span>
+						<span className="inline-flex items-center gap-2 text-gray-400">
+							<Clock size={14} />
+							{currentPost.readingTime}
+						</span>
+					</div>
+
+					<h1 className="mt-6 max-w-3xl text-4xl font-bold tracking-tight md:text-6xl">
+						{currentPost.title}
+					</h1>
+					<p className="mt-5 max-w-3xl text-lg leading-relaxed text-gray-300">
+						{currentPost.description}
+					</p>
+
+					<div className="mt-8 rounded-[1.5rem] border border-white/10 bg-[#14081f] p-5 text-gray-200">
+						{currentPost.hero}
+					</div>
+
+					<div className="mt-10 space-y-10 prose prose-invert max-w-none">
+						{currentPost.sections.map((section) => (
+							<section key={section.heading}>
+								<h2>{section.heading}</h2>
+								{section.paragraphs.map((paragraph) => (
+									<p key={paragraph}>{paragraph}</p>
+								))}
+								{section.bullets?.length > 0 && (
+									<ul>
+										{section.bullets.map((bullet) => (
+											<li key={bullet}>{bullet}</li>
+										))}
+									</ul>
+								)}
+							</section>
+						))}
+					</div>
+
+					<div className="mt-12 border-t border-white/10 pt-8">
+						<p className="text-sm uppercase tracking-[0.3em] text-gray-500">
+							Related articles
+						</p>
+						<div className="mt-5 grid gap-4 md:grid-cols-3">
+							{relatedPosts.map((relatedPost) => (
+								<a
+									key={relatedPost.slug}
+									href={relatedPost.path}
+									className="rounded-2xl border border-white/10 bg-white/5 p-4 transition-colors hover:border-primary/30 hover:bg-white/10"
+								>
+									<p className="text-sm text-primary">{relatedPost.category}</p>
+									<h3 className="mt-2 font-semibold text-white">
+										{relatedPost.title}
+									</h3>
+								</a>
+							))}
+						</div>
+					</div>
+				</motion.article>
+			</main>
+		</BlogShell>
+	);
+};

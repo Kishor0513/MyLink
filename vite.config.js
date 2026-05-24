@@ -1,7 +1,11 @@
 import react from '@vitejs/plugin-react';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vite';
 
 // https://vitejs.dev/config/
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 const buildId =
 	process.env.VITE_BUILD_ID ??
 	process.env.GITHUB_SHA ??
@@ -29,10 +33,25 @@ export default defineConfig({
 			},
 		},
 		rollupOptions: {
+			input: {
+				main: resolve(__dirname, 'src/index.html'),
+				blog: resolve(__dirname, 'src/blog/index.html'),
+				'blog/seo-for-react-portfolios': resolve(
+					__dirname,
+					'src/blog/seo-for-react-portfolios/index.html',
+				),
+				'blog/sitemap-and-robots-for-small-sites': resolve(
+					__dirname,
+					'src/blog/sitemap-and-robots-for-small-sites/index.html',
+				),
+				'blog/performance-checklist-for-portfolio-sites': resolve(
+					__dirname,
+					'src/blog/performance-checklist-for-portfolio-sites/index.html',
+				),
+			},
 			output: {
 				manualChunks: {
-					'react-vendor': ['react', 'react-dom'],
-					'three-vendor': ['three', '@react-three/fiber', '@react-three/drei'],
+					'react-vendor': ['react', 'react-dom', 'react/jsx-runtime'],
 					'animation-vendor': ['framer-motion'],
 				},
 			},

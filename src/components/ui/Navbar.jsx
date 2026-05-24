@@ -17,16 +17,18 @@ const Navbar = () => {
 		{ name: 'Experience', href: '#experience' },
 		{ name: 'Skills', href: '#skills' },
 		{ name: 'Projects', href: '#projects' },
+		{ name: 'Blog', href: '/blog/' },
 	];
 
 	return (
 		<motion.nav
 			initial={{ y: -100 }}
 			animate={{ y: 0 }}
-			className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${scrolled
+			className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
+				scrolled
 					? 'py-4 ios-glass !border-none !rounded-none'
 					: 'py-6 bg-transparent'
-				}`}
+			}`}
 		>
 			<div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
 				<motion.a
@@ -88,6 +90,9 @@ const Navbar = () => {
 				<button
 					className="lg:hidden p-2 text-gray-300 hover:text-white transition-colors rounded-lg liquid-glass"
 					onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+					aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+					aria-expanded={mobileMenuOpen}
+					aria-controls="mobile-navigation"
 				>
 					{mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
 				</button>
@@ -97,6 +102,7 @@ const Navbar = () => {
 			<AnimatePresence>
 				{mobileMenuOpen && (
 					<motion.div
+						id="mobile-navigation"
 						initial={{ opacity: 0, x: 100 }}
 						animate={{ opacity: 1, x: 0 }}
 						exit={{ opacity: 0, x: 100 }}
@@ -105,6 +111,7 @@ const Navbar = () => {
 						<button
 							onClick={() => setMobileMenuOpen(false)}
 							className="absolute top-8 right-8 p-2 text-gray-400 hover:text-white"
+							aria-label="Close navigation menu"
 						>
 							<X size={32} />
 						</button>
