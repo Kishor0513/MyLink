@@ -3,7 +3,9 @@ import { AnimatePresence, motion } from 'framer-motion';
 import {
 	ArrowRight,
 	ArrowUp,
+	ChevronDown,
 	Cpu,
+	Download,
 	ExternalLink,
 	Github,
 	Globe,
@@ -74,11 +76,50 @@ const LazyWhenVisible = ({ children, className = '' }) => {
 	);
 };
 
+const HERO_ROLES = [
+	'Full Stack Developer',
+	'React Specialist',
+	'UI/UX Enthusiast',
+	'Backend Engineer',
+];
+
+const HeroTypewriter = () => {
+	const [roleIdx, setRoleIdx] = useState(0);
+	const [displayed, setDisplayed] = useState('');
+	const [deleting, setDeleting] = useState(false);
+
+	useEffect(() => {
+		const currentRole = HERO_ROLES[roleIdx];
+		let timeout;
+		if (!deleting && displayed.length < currentRole.length) {
+			timeout = setTimeout(
+				() => setDisplayed(currentRole.slice(0, displayed.length + 1)),
+				80,
+			);
+		} else if (!deleting && displayed.length === currentRole.length) {
+			timeout = setTimeout(() => setDeleting(true), 2200);
+		} else if (deleting && displayed.length > 0) {
+			timeout = setTimeout(() => setDisplayed(displayed.slice(0, -1)), 40);
+		} else {
+			setDeleting(false);
+			setRoleIdx((prev) => (prev + 1) % HERO_ROLES.length);
+		}
+		return () => clearTimeout(timeout);
+	}, [displayed, deleting, roleIdx]);
+
+	return (
+		<span>
+			<span className="text-primary font-medium">{displayed}</span>
+			<span className="text-primary/60 animate-pulse">|</span>
+		</span>
+	);
+};
+
 function App() {
 	const [isSending, setIsSending] = useState(false);
 	const [submitStatus, setSubmitStatus] = useState(null);
 	const formRef = useRef();
-	const isLargeScreen = useMediaQuery('(min-width: 1024px)');
+	const isLargeScreen = useMediaQuery('(min-width: 768px)');
 
 	useEffect(() => {
 		if (isLargeScreen) {
@@ -130,134 +171,124 @@ function App() {
 						id="home"
 						className="relative min-h-screen flex flex-col justify-center px-6 overflow-hidden pt-20"
 					>
-						{/* Background removed as it is now global */}
-
-						{/* Gradient Overlays for Lavender Effect */}
+						{/* Gradient Overlays */}
 						<div className="absolute inset-0 bg-gradient-to-b from-dark/20 via-transparent to-dark pointer-events-none" />
 						<div className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[120px] pointer-events-none animate-pulse" />
 						<div className="absolute -bottom-[10%] -right-[10%] w-[40%] h-[40%] bg-secondary/10 rounded-full blur-[120px] pointer-events-none animate-pulse" />
 
 						<div className="relative z-10 max-w-7xl mx-auto w-full">
-							<motion.div
-								initial="hidden"
-								whileInView="visible"
-								viewport={{ once: true }}
-								variants={fadeIn}
-								className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8"
-							>
+							<div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8">
+
 								{/* Left - Content */}
 								<div className="text-left max-w-2xl">
+
+									{/* Available Badge */}
 									<motion.div
-										whileHover={{
-											scale: 1.05,
-											boxShadow: '0 0 25px rgba(167, 139, 250, 0.3)',
-										}}
-										className="inline-block px-4 py-1.5 mb-6 ios-glass rounded-full bg-primary/10 font-mono text-base text-primary cursor-default"
+										initial={{ opacity: 0, y: 20 }}
+										animate={{ opacity: 1, y: 0 }}
+										transition={{ duration: 0.5, delay: 0.1 }}
+										className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 ios-glass rounded-full bg-green-500/10 text-sm text-green-400 cursor-default border border-green-500/20"
 									>
-										&lt;Dev_Mode active={'true'} /&gt;
+										<span className="w-2 h-2 rounded-full bg-green-400 animate-pulse inline-block" />
+										Available for Work
 									</motion.div>
-									<h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 leading-[1.1]">
-										<motion.span
-											whileHover={{ x: 10, scale: 1.02 }}
-											className="block text-white cursor-default transition-colors hover:text-primary/90"
-										>
-											Kishor
-										</motion.span>
-										<motion.span
-											whileHover={{ x: 10, scale: 1.02 }}
-											className="block running-gradient pb-2 cursor-default"
-										>
-											Chaudhary
-										</motion.span>
-									</h1>
-									<motion.h2
-										whileHover={{ x: 5, scale: 1.02 }}
-										className="text-2xl md:text-3xl lg:text-4xl text-gray-300 mb-6 font-light cursor-default"
+
+									{/* Name */}
+									<motion.h1
+										initial={{ opacity: 0, y: 30 }}
+										animate={{ opacity: 1, y: 0 }}
+										transition={{ duration: 0.7, delay: 0.2 }}
+										className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 leading-[1.1]"
 									>
-										<span className="text-primary font-medium">
-											Full Stack Developer
-										</span>
-									</motion.h2>
+										<span className="block text-white">Kishor</span>
+										<span className="block running-gradient pb-2">Chaudhary</span>
+									</motion.h1>
+
+									{/* Typewriter Role */}
+									<motion.div
+										initial={{ opacity: 0, y: 20 }}
+										animate={{ opacity: 1, y: 0 }}
+										transition={{ duration: 0.5, delay: 0.4 }}
+										className="text-2xl md:text-3xl lg:text-4xl text-gray-300 mb-6 font-light min-h-[3rem]"
+									>
+										<HeroTypewriter />
+									</motion.div>
+
+									{/* Description */}
 									<motion.p
-										whileHover={{ scale: 1.01 }}
+										initial={{ opacity: 0, y: 20 }}
+										animate={{ opacity: 1, y: 0 }}
+										transition={{ duration: 0.5, delay: 0.55 }}
 										className="text-base md:text-lg text-gray-400 mb-8 max-w-xl leading-relaxed"
 									>
-										Specialized in architecting high-performance E-commerce
-										platforms and immersive digital experiences. Building
-										full-stack solutions that merge creative design with robust
-										engineering.
+										Specialized in architecting high-performance E-commerce platforms and immersive digital experiences. Building full-stack solutions that merge creative design with robust engineering.
 									</motion.p>
 
-									{/* Quick Stats */}
+									{/* Stats */}
 									<motion.div
-										initial={{ opacity: 0 }}
-										animate={{ opacity: 1 }}
-										transition={{ delay: 0.5 }}
-										className="flex flex-wrap gap-6 mb-10"
+										initial={{ opacity: 0, y: 20 }}
+										animate={{ opacity: 1, y: 0 }}
+										transition={{ duration: 0.5, delay: 0.7 }}
+										className="flex items-stretch mb-10"
 									>
 										{[
-											{ value: '3+', label: 'Years' },
+											{ value: '3+', label: 'Years Exp.' },
 											{ value: '10+', label: 'Projects' },
 											{ value: '500+', label: 'Commits' },
-										].map((stat) => (
-											<div
-												key={stat.label}
-												className="text-center"
-											>
-												<div className="text-2xl font-bold text-primary">
-													{stat.value}
+										].map((stat, i) => (
+											<div key={stat.label} className="flex items-center">
+												<div className="text-center px-6 py-3 ios-glass rounded-xl">
+													<div className="text-2xl font-bold text-primary">{stat.value}</div>
+													<div className="text-xs text-gray-400 uppercase tracking-wider mt-0.5">{stat.label}</div>
 												</div>
-												<div className="text-xs text-gray-400 uppercase tracking-wider">
-													{stat.label}
-												</div>
+												{i < 2 && <div className="w-px h-10 bg-white/10 mx-2 self-center" />}
 											</div>
 										))}
 									</motion.div>
 
-									<div className="flex flex-wrap gap-4">
+									{/* CTAs */}
+									<motion.div
+										initial={{ opacity: 0, y: 20 }}
+										animate={{ opacity: 1, y: 0 }}
+										transition={{ duration: 0.5, delay: 0.85 }}
+										className="flex flex-wrap gap-4"
+									>
 										<motion.a
 											href="#projects"
 											whileHover={{ scale: 1.05 }}
 											whileTap={{ scale: 0.95 }}
-											className="group relative px-8 py-4 bg-white/90 text-white font-bold rounded-full overflow-hidden transition-all shadow-lg shadow-primary/20 liquid-glass inline-flex items-center gap-3"
+											className="group px-8 py-4 bg-primary text-white font-bold rounded-full shadow-lg shadow-primary/30 inline-flex items-center gap-3 hover:shadow-primary/50 transition-all"
 										>
-											<span className="relative z-10">View Projects</span>
-											<motion.span
-												animate={{ y: [0, 5, 0] }}
-												transition={{
-													duration: 2,
-													repeat: Infinity,
-													ease: 'easeInOut',
-												}}
-												className="relative z-10"
-											>
-												<ArrowRight
-													size={18}
-													className="rotate-90"
-												/>
-											</motion.span>
+											View Projects
+											<ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
 										</motion.a>
-									</div>
+										<motion.a
+											href="/assets/Kishor_Chaudhary_CV.pdf"
+											target="_blank"
+											rel="noopener noreferrer"
+											whileHover={{ scale: 1.05 }}
+											whileTap={{ scale: 0.95 }}
+											className="group px-8 py-4 liquid-glass text-white font-bold rounded-full inline-flex items-center gap-3 hover:border-primary/30 transition-all"
+										>
+											<Download size={18} />
+											Download CV
+										</motion.a>
+									</motion.div>
 								</div>
 
 								{/* Right - Panda Image */}
 								{isLargeScreen && (
 									<motion.div
-										initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
-										whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-										transition={{ duration: 1, delay: 0.2 }}
+										initial={{ opacity: 0, scale: 0.8, x: 40 }}
+										animate={{ opacity: 1, scale: 1, x: 0 }}
+										transition={{ duration: 1, delay: 0.3 }}
 										className="relative flex-shrink-0"
 									>
 										<div className="relative w-[480px] h-[480px] xl:w-[550px] xl:h-[550px]">
-											{/* Gradient Glow Background */}
+											{/* Gradient Glow */}
 											<div className="absolute inset-0 bg-gradient-to-tr from-primary/30 to-secondary/30 rounded-full blur-[120px] -z-10 animate-pulse" />
-
-											{/* Image Container */}
-											<motion.div
-												whileHover={{ scale: 1.02 }}
-												transition={{ type: 'spring', stiffness: 300 }}
-												className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/10 glass-card p-4 liquid-glass w-full h-full"
-											>
+											{/* Floating Image */}
+											<div className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/10 glass-card p-4 liquid-glass w-full h-full animate-float">
 												<img
 													src="/assets/optimized/anime_coder_panda-640.jpg"
 													alt="Anime Panda Coding"
@@ -267,15 +298,34 @@ function App() {
 													fetchPriority="high"
 													className="w-full h-full object-cover rounded-2xl"
 												/>
-
-												{/* Overlay Shine Effect */}
 												<div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-50 pointer-events-none rounded-2xl" />
-											</motion.div>
+											</div>
 										</div>
 									</motion.div>
 								)}
-							</motion.div>
+							</div>
 						</div>
+
+						{/* Scroll Indicator */}
+						<motion.div
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							transition={{ delay: 1.4, duration: 0.8 }}
+							className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-gray-500 cursor-pointer hover:text-primary transition-colors"
+							onClick={() =>
+								document
+									.getElementById('experience')
+									?.scrollIntoView({ behavior: 'smooth' })
+							}
+						>
+							<span className="text-xs uppercase tracking-[0.2em] font-medium">Scroll</span>
+							<motion.div
+								animate={{ y: [0, 8, 0] }}
+								transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+							>
+								<ChevronDown size={20} />
+							</motion.div>
+						</motion.div>
 					</section>
 
 					<Timeline />
@@ -592,6 +642,7 @@ function App() {
 							<GitHubStats />
 						</Suspense>
 					</LazyWhenVisible>
+
 
 					{/* Footer / Contact Section */}
 					<footer
