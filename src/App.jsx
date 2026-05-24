@@ -12,19 +12,108 @@ import {
 	Mail,
 	Server,
 } from 'lucide-react';
-import { Suspense, useRef, useState } from 'react';
-import Hero3D from './components/canvas/Hero3D';
+import { lazy, Suspense, useEffect, useRef, useState } from 'react';
+import { BlogIndexPage, BlogPostPage } from './components/blog/BlogPages';
 import ErrorBoundary from './components/ui/ErrorBoundary';
-import GitHubStats from './components/ui/GitHubStats';
 import Navbar from './components/ui/Navbar';
-import ShootingStars from './components/ui/ShootingStars';
-import SpaceBackground from './components/ui/SpaceBackground';
-import Timeline from './components/ui/Timeline';
+import { blogPosts } from './data/blogPosts';
+const ShootingStars = lazy(() => import('./components/ui/ShootingStars'));
+const SpaceBackground = lazy(() => import('./components/ui/SpaceBackground'));
+const Timeline = lazy(() => import('./components/ui/Timeline'));
+
+const Hero3D = lazy(() => import('./components/canvas/Hero3D'));
+const GitHubStats = lazy(() => import('./components/ui/GitHubStats'));
+
+const useLoadOnInteraction = () => {
+	const [hasInteracted, setHasInteracted] = useState(false);
+
+	useEffect(() => {
+		const load = () => setHasInteracted(true);
+		const events = ['pointerdown', 'keydown', 'touchstart'];
+		events.forEach((event) =>
+			window.addEventListener(event, load, {
+				once: true,
+				passive: true,
+			}),
+		);
+
+		return () => {
+			events.forEach((event) => window.removeEventListener(event, load));
+		};
+	}, []);
+
+	return hasInteracted;
+};
+
+const useMediaQuery = (query) => {
+	const [matches, setMatches] = useState(false);
+
+	useEffect(() => {
+		const mediaQuery = window.matchMedia(query);
+		const updateMatches = () => setMatches(mediaQuery.matches);
+
+		updateMatches();
+		mediaQuery.addEventListener('change', updateMatches);
+
+		return () => mediaQuery.removeEventListener('change', updateMatches);
+	}, [query]);
+
+	return matches;
+};
+
+const LazyWhenVisible = ({ children, className = '' }) => {
+	const [isVisible, setIsVisible] = useState(false);
+	const containerRef = useRef(null);
+
+	useEffect(() => {
+		if (isVisible || !containerRef.current) {
+			return;
+		}
+
+		const observer = new IntersectionObserver(
+			([entry]) => {
+				if (entry.isIntersecting) {
+					setIsVisible(true);
+					observer.disconnect();
+				}
+			},
+			{ rootMargin: '700px 0px' },
+		);
+
+		observer.observe(containerRef.current);
+
+		return () => observer.disconnect();
+	}, [isVisible]);
+
+	return (
+		<div
+			ref={containerRef}
+			className={className}
+		>
+			{isVisible ? children : null}
+		</div>
+	);
+};
 
 function App() {
 	const [isSending, setIsSending] = useState(false);
 	const [submitStatus, setSubmitStatus] = useState(null);
 	const formRef = useRef();
+	const shouldRenderHero3D = useLoadOnInteraction();
+	const isLargeScreen = useMediaQuery('(min-width: 1024px)');
+	const pathname =
+		typeof window !== 'undefined'
+			? window.location.pathname.replace(/\/+$/, '') || '/'
+			: '/';
+
+	if (pathname === '/blog' || pathname === '/blog/') {
+		return <BlogIndexPage />;
+	}
+
+	if (pathname.startsWith('/blog/')) {
+		const slug = pathname.split('/').filter(Boolean)[1];
+		return <BlogPostPage post={{ slug }} />;
+	}
 
 	// Animation variants
 	const fadeIn = {
@@ -38,17 +127,15 @@ function App() {
 				<Navbar />
 
 				<div className="fixed inset-0 z-0 pointer-events-none">
-					<SpaceBackground />
-					<ShootingStars />
-					<Suspense
-						fallback={
-							<div className="w-full h-full flex items-center justify-center">
-								<div className="w-8 h-8 border-4 border-purple-500/20 border-t-purple-500/60 rounded-full animate-spin"></div>
-							</div>
-						}
-					>
-						<Hero3D />
+					<Suspense fallback={null}>
+						<SpaceBackground />
+						<ShootingStars />
 					</Suspense>
+					{shouldRenderHero3D && (
+						<Suspense fallback={null}>
+							<Hero3D />
+						</Suspense>
+					)}
 				</div>
 
 				<main className="relative z-10">
@@ -134,7 +221,7 @@ function App() {
 												<div className="text-2xl font-bold text-primary">
 													{stat.value}
 												</div>
-												<div className="text-xs text-gray-500 uppercase tracking-wider">
+												<div className="text-xs text-gray-400 uppercase tracking-wider">
 													{stat.label}
 												</div>
 											</div>
@@ -168,33 +255,39 @@ function App() {
 								</div>
 
 								{/* Right - Panda Image */}
-								<motion.div
-									initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
-									whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-									transition={{ duration: 1, delay: 0.2 }}
-									className="relative flex-shrink-0 hidden lg:block"
-								>
-									<div className="relative w-[480px] h-[480px] xl:w-[550px] xl:h-[550px]">
-										{/* Gradient Glow Background */}
-										<div className="absolute inset-0 bg-gradient-to-tr from-primary/30 to-secondary/30 rounded-full blur-[120px] -z-10 animate-pulse" />
+								{isLargeScreen && (
+									<motion.div
+										initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
+										whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+										transition={{ duration: 1, delay: 0.2 }}
+										className="relative flex-shrink-0"
+									>
+										<div className="relative w-[480px] h-[480px] xl:w-[550px] xl:h-[550px]">
+											{/* Gradient Glow Background */}
+											<div className="absolute inset-0 bg-gradient-to-tr from-primary/30 to-secondary/30 rounded-full blur-[120px] -z-10 animate-pulse" />
 
-										{/* Image Container */}
-										<motion.div
-											whileHover={{ scale: 1.02 }}
-											transition={{ type: 'spring', stiffness: 300 }}
-											className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/10 glass-card p-4 liquid-glass w-full h-full"
-										>
-											<img
-												src="/assets/anime_coder_panda.png"
-												alt="Anime Panda Coding"
-												className="w-full h-full object-cover rounded-2xl"
-											/>
+											{/* Image Container */}
+											<motion.div
+												whileHover={{ scale: 1.02 }}
+												transition={{ type: 'spring', stiffness: 300 }}
+												className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/10 glass-card p-4 liquid-glass w-full h-full"
+											>
+												<img
+													src="/assets/optimized/anime_coder_panda-640.jpg"
+													alt="Anime Panda Coding"
+													width="640"
+													height="640"
+													decoding="async"
+													fetchPriority="high"
+													className="w-full h-full object-cover rounded-2xl"
+												/>
 
-											{/* Overlay Shine Effect */}
-											<div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-50 pointer-events-none rounded-2xl" />
-										</motion.div>
-									</div>
-								</motion.div>
+												{/* Overlay Shine Effect */}
+												<div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-50 pointer-events-none rounded-2xl" />
+											</motion.div>
+										</div>
+									</motion.div>
+								)}
 							</motion.div>
 						</div>
 					</section>
@@ -334,7 +427,7 @@ function App() {
 										link: 'https://github.com/Kishor0513/Chiya-and-Puff',
 										live: '#',
 										tags: ['Next.js', 'Prisma', 'PostgreSQL'],
-										image: '/assets/real_chiya_puff.png',
+										image: '/assets/optimized/real_chiya_puff-700.jpg',
 										className: 'md:col-span-2',
 									},
 									{
@@ -343,8 +436,7 @@ function App() {
 										link: 'https://github.com/Kishor0513/Social-Media',
 										live: '#',
 										tags: ['React', 'Node.js', 'Socket.io'],
-										image:
-											'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&q=80&w=1000',
+										image: '/assets/optimized/social_media-520.jpg',
 										className: 'md:col-span-1',
 									},
 									{
@@ -353,8 +445,7 @@ function App() {
 										link: 'https://github.com/Kishor0513/Weavers',
 										live: '#',
 										tags: ['PHP', 'MySQL', 'Ecommerce'],
-										image:
-											'https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&q=80&w=1000',
+										image: '/assets/optimized/ecommerce-520.jpg',
 										className: 'md:col-span-1',
 									},
 									{
@@ -372,8 +463,7 @@ function App() {
 										link: 'https://github.com/Kishor0513/Blog',
 										live: '#',
 										tags: ['Next.js', 'Vercel', 'Blog'],
-										image:
-											'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=1000',
+										image: '/assets/optimized/portfolio-520.jpg',
 										className: 'md:col-span-1 lg:col-span-1',
 									},
 								].map((project, i) => (
@@ -393,7 +483,8 @@ function App() {
 												decoding="async"
 												onError={(e) => {
 													e.currentTarget.onerror = null;
-													e.currentTarget.src = '/assets/portfolio.png';
+													e.currentTarget.src =
+														'/assets/optimized/portfolio-520.jpg';
 												}}
 												className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
 											/>
@@ -451,7 +542,70 @@ function App() {
 						</div>
 					</section>
 
-					<GitHubStats />
+					{/* Blog Preview Section */}
+					<section
+						id="blog"
+						className="py-24 px-6 relative overflow-hidden"
+					>
+						<div className="max-w-7xl mx-auto">
+							<motion.div
+								initial="hidden"
+								whileInView="visible"
+								viewport={{ once: true }}
+								variants={fadeIn}
+								className="text-center mb-16"
+							>
+								<h2 className="text-4xl md:text-5xl font-bold mb-4 running-gradient inline-block">
+									Latest Blog Posts
+								</h2>
+								<p className="text-gray-400 text-lg max-w-2xl mx-auto">
+									Practical notes about SEO, indexing, and fast portfolio
+									builds.
+								</p>
+							</motion.div>
+
+							<div className="grid md:grid-cols-3 gap-6">
+								{blogPosts.map((post) => (
+									<motion.a
+										key={post.slug}
+										href={post.path}
+										whileHover={{ y: -6 }}
+										className="group rounded-[1.75rem] border border-white/10 bg-white/5 p-6 backdrop-blur-xl transition-colors hover:border-primary/30"
+									>
+										<div className="flex items-center justify-between gap-4 text-xs uppercase tracking-[0.25em] text-primary">
+											<span>{post.category}</span>
+											<span className="text-gray-300">{post.readingTime}</span>
+										</div>
+										<h3 className="mt-4 text-2xl font-bold text-white transition-colors group-hover:text-primary">
+											{post.title}
+										</h3>
+										<p className="mt-3 text-sm leading-relaxed text-gray-400">
+											{post.excerpt}
+										</p>
+										<div className="mt-5 flex flex-wrap gap-2">
+											{post.tags.map((tag) => (
+												<span
+													key={tag}
+													className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-gray-300"
+												>
+													{tag}
+												</span>
+											))}
+										</div>
+										<div className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white group-hover:text-primary">
+											Read article <ArrowRight size={16} />
+										</div>
+									</motion.a>
+								))}
+							</div>
+						</div>
+					</section>
+
+					<LazyWhenVisible className="min-h-px">
+						<Suspense fallback={null}>
+							<GitHubStats />
+						</Suspense>
+					</LazyWhenVisible>
 
 					{/* Footer / Contact Section */}
 					<footer
