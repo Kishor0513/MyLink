@@ -178,10 +178,8 @@ function App() {
 
 						<div className="relative z-10 max-w-7xl mx-auto w-full">
 							<div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8">
-
 								{/* Left - Content */}
 								<div className="text-left max-w-2xl">
-
 									{/* Available Badge */}
 									<motion.div
 										initial={{ opacity: 0, y: 20 }}
@@ -201,7 +199,9 @@ function App() {
 										className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 leading-[1.1]"
 									>
 										<span className="block text-white">Kishor</span>
-										<span className="block running-gradient pb-2">Chaudhary</span>
+										<span className="block running-gradient pb-2">
+											Chaudhary
+										</span>
 									</motion.h1>
 
 									{/* Typewriter Role */}
@@ -221,7 +221,10 @@ function App() {
 										transition={{ duration: 0.5, delay: 0.55 }}
 										className="text-base md:text-lg text-gray-400 mb-8 max-w-xl leading-relaxed"
 									>
-										Specialized in architecting high-performance E-commerce platforms and immersive digital experiences. Building full-stack solutions that merge creative design with robust engineering.
+										Specialized in architecting high-performance E-commerce
+										platforms and immersive digital experiences. Building
+										full-stack solutions that merge creative design with robust
+										engineering.
 									</motion.p>
 
 									{/* Stats */}
@@ -236,12 +239,21 @@ function App() {
 											{ value: '10+', label: 'Projects' },
 											{ value: '500+', label: 'Commits' },
 										].map((stat, i) => (
-											<div key={stat.label} className="flex items-center">
+											<div
+												key={stat.label}
+												className="flex items-center"
+											>
 												<div className="text-center px-6 py-3 ios-glass rounded-xl">
-													<div className="text-2xl font-bold text-primary">{stat.value}</div>
-													<div className="text-xs text-gray-400 uppercase tracking-wider mt-0.5">{stat.label}</div>
+													<div className="text-2xl font-bold text-primary">
+														{stat.value}
+													</div>
+													<div className="text-xs text-gray-400 uppercase tracking-wider mt-0.5">
+														{stat.label}
+													</div>
 												</div>
-												{i < 2 && <div className="w-px h-10 bg-white/10 mx-2 self-center" />}
+												{i < 2 && (
+													<div className="w-px h-10 bg-white/10 mx-2 self-center" />
+												)}
 											</div>
 										))}
 									</motion.div>
@@ -260,7 +272,10 @@ function App() {
 											className="group px-8 py-4 bg-primary text-white font-bold rounded-full shadow-lg shadow-primary/30 inline-flex items-center gap-3 hover:shadow-primary/50 transition-all"
 										>
 											View Projects
-											<ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+											<ArrowRight
+												size={18}
+												className="group-hover:translate-x-1 transition-transform"
+											/>
 										</motion.a>
 										<motion.a
 											href="/assets/Kishor_Chaudhary_CV.pdf"
@@ -318,10 +333,16 @@ function App() {
 									?.scrollIntoView({ behavior: 'smooth' })
 							}
 						>
-							<span className="text-xs uppercase tracking-[0.2em] font-medium">Scroll</span>
+							<span className="text-xs uppercase tracking-[0.2em] font-medium">
+								Scroll
+							</span>
 							<motion.div
 								animate={{ y: [0, 8, 0] }}
-								transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+								transition={{
+									duration: 1.5,
+									repeat: Infinity,
+									ease: 'easeInOut',
+								}}
 							>
 								<ChevronDown size={20} />
 							</motion.div>
@@ -643,7 +664,6 @@ function App() {
 						</Suspense>
 					</LazyWhenVisible>
 
-
 					{/* Footer / Contact Section */}
 					<footer
 						id="contact"
@@ -753,7 +773,7 @@ function App() {
 														'service_tmldjzb',
 														'template_b748drf',
 														formRef.current,
-														'pFJE1WaB8zsqoN9Z0',
+														'FGWKWmgcKol5gZ9qb',
 													)
 													.then(
 														() => {
