@@ -1,145 +1,98 @@
 # Kishor Chaudhary - Portfolio Website
 
-A modern, interactive portfolio website showcasing my work as a Full Stack Developer. Built with React, Vite, Tailwind CSS, and motion-driven visuals.
+A modern, responsive portfolio website showcasing my work as a Full Stack Developer. Built with React 18, Vite, Tailwind CSS, and Framer Motion.
 
-🌐 **Live Site**: [kishorchaudhary.com.np](https://www.kishorchaudhary.com.np)
+**Live Site**: [kishorchaudhary.com.np](https://www.kishorchaudhary.com.np)
 
-If the live site still shows an older version after a push, it is usually one of these:
+![Hero Section](assets/myphoto.webp)
 
-- The production build in `dist/` was not redeployed.
-- The browser is serving a cached service worker version.
-- The hosting provider or CDN has not refreshed yet.
+## Features
 
-Hard refresh the site first. If it still looks stale, clear site data for the domain or redeploy the generated `dist/` output.
+- **Photo Background Hero**: Full-screen personal photo with overlay and floating tech stack icons
+- **Animated Progress Bars**: Skills section with scroll-triggered progress bars
+- **Project Showcase**: Filterable project cards with custom SVG illustrations and preview images
+- **Experience Timeline**: Interactive timeline component with scroll animations
+- **Contact Form**: EmailJS-powered contact form with validation and success feedback
+- **Performance Optimized**: Minimal CSS (~36KB gzipped), GPU-accelerated animations, lazy-loaded images
+- **Accessible**: Semantic HTML, ARIA labels, `prefers-reduced-motion` support
+- **Blog**: Built-in blog with markdown posts, SEO metadata, sitemap generation
 
-## 🚀 Features
+## Tech Stack
 
-- **3D Hero Section**: Interactive 3D environment powered by React Three Fiber
-- **Responsive Design**: Fully responsive across all devices
-- **Modern UI/UX**: Clean, professional design with smooth animations
-- **QR Code Integration**: Easy sharing and connectivity
-- **Contact Form**: Direct email integration for seamless communication
+| Category | Technologies |
+|----------|------------|
+| **Framework** | React 18 |
+| **Build** | Vite |
+| **Styling** | Tailwind CSS, CSS custom properties |
+| **Animations** | Framer Motion |
+| **Icons** | Lucide React, React Icons (Simple Icons) |
+| **Email** | EmailJS |
+| **Blog** | gray-matter, marked |
+| **Hosting** | GitHub Pages + Cloudflare |
 
-## 🛠️ Technologies Used
+## Project Structure
 
-- **Frontend Framework**: React 18
-- **Build Tool**: Vite
-- **Styling**: Tailwind CSS
-- **3D Graphics**:
-  - Three.js
-  - React Three Fiber (@react-three/fiber)
-  - React Three Drei (@react-three/drei)
-  - React Three Postprocessing
-- **Animations**: Framer Motion
-- **Icons**: Lucide React
-- **QR Code**: qrcode.react
-
-## 📦 Installation & Setup
-
-### Prerequisites
-
-- Node.js (`^20.19.0` or `>=22.12.0`)
-- npm `11.6.2` (declared in `packageManager`)
-
-### Installation
-
-1. Clone the repository:
-
-```bash
-git clone https://github.com/Kishor0513/My-Portfolio.git
-cd My-Portfolio
+```
+├── public/                   # Static assets
+│   └── assets/              # Images, icons, PDFs
+├── src/
+│   ├── components/
+│   │   ├── blog/           # Blog page components
+│   │   └── ui/             # UI components (Navbar, Timeline, etc.)
+│   ├── data/               # Blog posts, site metadata
+│   ├── lib/                # Utility functions
+│   ├── App.jsx             # Main application component
+│   ├── main.jsx            # Entry point
+│   └── index.css           # Global styles + custom classes
+├── dist/                   # Production build output
+├── assets/                 # Deployed root assets (GitHub Pages)
+├── blog/                   # Deployed blog pages (GitHub Pages)
+├── index.html              # Deployed root HTML (GitHub Pages)
+├── CNAME                   # Custom domain config
+├── deploy.ps1              # PowerShell deploy script
+├── vite.config.js
+└── tailwind.config.js
 ```
 
-2. Install dependencies:
+## Getting Started
 
 ```bash
+# Install dependencies
 npm ci
-```
 
-3. Run the development server:
-
-```bash
+# Development server
 npm run dev
-```
 
-4. Build for production:
-
-```bash
+# Production build
 npm run build
-```
 
-5. Preview production build:
-
-```bash
+# Preview build
 npm run preview
 ```
 
-## 🚀 Deployment
+## Deployment
 
-This project is built from the Vite source in `src/` and outputs a production build to `dist/`.
-
-To publish a new version:
-
-1. Build the site:
+The site is served via GitHub Pages from the repository root. To deploy updates:
 
 ```bash
-npm run build
+npm run build                    # Build to dist/
+rm -rf assets blog               # Remove old root artifacts
+cp -R dist/* .                   # Copy dist contents to root
+git add -A && git commit -m "deploy: ..."
+git push
 ```
 
-2. Deploy the generated files from `dist/` to the hosting target.
+Alternatively, run `deploy.ps1` (PowerShell on Windows) which automates these steps.
 
-3. If the site still shows an older version, clear the browser cache or site data. The app registers a service worker and can keep an older build until the new cache version is picked up.
+## Design
 
-For the included GitHub Pages workflow, see `deploy.ps1`, which builds the project and copies the production output to the repository root.
+- **Color Palette**: Deep violet/black background (`#0f0518`) with lavender primary (`#bfa8ff`) and pink secondary (`#ff9ce6`)
+- **Glassmorphism**: Frosted glass surfaces via `backdrop-filter: blur()` with subtle border highlights
+- **Animations**: Custom cubic-bezier easing, staggered entrance sequences, scroll-triggered reveals
+- **Typography**: Inter (body), Outfit (headings), Space Grotesk (display)
 
-### Dependency Maintenance
+## Contact
 
-Use the pinned npm version from `packageManager` before touching dependencies:
-
-```bash
-corepack enable
-corepack prepare npm@11.6.2 --activate
-```
-
-Keep lockfile-only refreshes separate from dependency bumps:
-
-```bash
-npm run lockfile:refresh
-npm run deps:bump
-```
-
-Run `npm run lockfile:refresh` when `package.json` already has the intended dependency changes and the lockfile only needs to be regenerated. Use `npm run deps:bump` for an intentional dependency update, and review the resulting `package.json` and `package-lock.json` changes together.
-
-## 📂 Project Structure
-
-```
-├── public/              # Static assets
-│   └── assets/         # Images and media files
-├── src/
-│   ├── components/     # React components
-│   │   ├── canvas/    # 3D canvas components
-│   │   └── ui/        # UI components
-│   ├── App.jsx        # Main application component
-│   ├── main.jsx       # Application entry point
-│   └── index.css      # Global styles
-├── index.html         # HTML template
-└── vite.config.js     # Vite configuration
-```
-
-## 🎨 Design Philosophy
-
-This portfolio combines modern web technologies with artistic 3D design to create an immersive user experience. The color scheme uses deep dark backgrounds with lavender and pink accents to keep the UI readable and expressive.
-
-## 📧 Contact
-
-- **Website**: [kishorchaudhary.com.np](https://www.kishorchaudhary.com.np)
 - **Email**: kishorc2000@gmail.com
 - **GitHub**: [@Kishor0513](https://github.com/Kishor0513)
-
-## 📄 License
-
-This project is open source and available for personal and educational use.
-
----
-
-Built with ❤️ by Kishor Chaudhary
+- **Live**: [kishorchaudhary.com.np](https://www.kishorchaudhary.com.np)
