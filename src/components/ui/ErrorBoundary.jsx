@@ -25,7 +25,7 @@ class ErrorBoundary extends React.Component {
             </div>
             <button 
                 onClick={() => window.location.reload()}
-                className="px-6 py-3 bg-[#bfa8ff] text-[#0f0518] font-bold rounded-lg hover:bg-white transition-colors"
+                style={{ '--hover-color': '#ef4444' }} className="px-6 py-3 bg-[#bfa8ff] text-[#0f0518] font-bold rounded-lg transition-all hover-glow"
             >
                 Refresh Page
             </button>

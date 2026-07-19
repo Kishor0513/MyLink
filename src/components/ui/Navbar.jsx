@@ -26,24 +26,26 @@ const Navbar = () => {
 			animate={{ y: 0 }}
 			className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
 				scrolled
-					? 'py-4 ios-glass !border-none !rounded-none'
-					: 'py-6 bg-transparent'
+					? 'py-3 ios-glass !border-none !rounded-none'
+					: 'py-5 bg-transparent'
 			}`}
 		>
 			<div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-				<motion.a
-					href="#home"
-					className="text-3xl font-bold tracking-tight group flex items-center gap-0.5"
-				>
-					<span className="text-white">Kishor</span>
-					<span className="text-primary group-hover:text-secondary transition-colors">
-						.dev
-					</span>
-				</motion.a>
+			<motion.a
+				href="#home"
+				className="flex items-center gap-3 group"
+			>
+				<div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg shadow-primary/20 group-hover:scale-105 transition-transform">
+					<span className="text-dark font-black text-base tracking-tight">KC</span>
+				</div>
+				<span className="text-xl font-bold text-white hidden sm:block">
+					Kishor<span className="text-primary">.</span>
+				</span>
+			</motion.a>
 
 				{/* Desktop Nav */}
-				<div className="hidden lg:flex items-center gap-10">
-					<div className="flex items-center gap-8">
+				<div className="hidden lg:flex items-center gap-6">
+					<div className="flex items-center gap-6">
 						{navLinks.map((link) => (
 							<a
 								key={link.name}
@@ -64,7 +66,7 @@ const Navbar = () => {
 							rel="noopener noreferrer"
 							whileHover={{ scale: 1.05 }}
 							whileTap={{ scale: 0.95 }}
-							className="p-2.5 bg-white/5 hover:bg-white/10 rounded-full border border-white/10 transition-all text-primary liquid-glass flex items-center gap-2"
+							style={{ '--hover-color': '#8b5cf6' }} className="p-2.5 bg-white/5 rounded-full border border-white/10 transition-all text-primary liquid-glass flex items-center gap-2 hover-glow"
 						>
 							<Download size={18} />
 							<span className="text-sm font-semibold">Resume</span>
@@ -74,8 +76,7 @@ const Navbar = () => {
 							href="#contact"
 							whileHover={{ scale: 1.05 }}
 							whileTap={{ scale: 0.95 }}
-							className="px-6 py-2.5 bg-primary text-white font-bold rounded-full text-sm flex items-center gap-2 group shadow-lg shadow-primary/20 liquid-glass"
-							style={{ fontFamily: 'Outfit, Inter, system-ui, sans-serif' }}
+							style={{ '--hover-color': '#f97316', fontFamily: 'Outfit, Inter, system-ui, sans-serif' }} className="px-6 py-2.5 bg-primary text-white font-bold rounded-full text-sm flex items-center gap-2 group shadow-lg shadow-primary/20 liquid-glass hover-glow"
 						>
 							Let's Talk
 							<ArrowRight
@@ -88,7 +89,7 @@ const Navbar = () => {
 
 				{/* Mobile Toggle */}
 				<button
-					className="lg:hidden p-2 text-gray-300 hover:text-white transition-colors rounded-lg liquid-glass"
+					style={{ '--hover-color': '#06b6d4' }} className="lg:hidden p-2 text-gray-300 hover:text-white transition-all rounded-lg liquid-glass hover-glow"
 					onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
 					aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
 					aria-expanded={mobileMenuOpen}
@@ -140,8 +141,7 @@ const Navbar = () => {
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ delay: 0.6 }}
-							className="mt-4 px-10 py-4 bg-primary text-dark font-bold rounded-full text-xl liquid-glass flex items-center gap-3"
-							style={{ fontFamily: 'Outfit, Inter, system-ui, sans-serif' }}
+							style={{ '--hover-color': '#22c55e', fontFamily: 'Outfit, Inter, system-ui, sans-serif' }} className="mt-4 px-10 py-4 bg-primary text-dark font-bold rounded-full text-xl liquid-glass flex items-center gap-3 hover-glow"
 						>
 							<Download size={20} />
 							Download CV

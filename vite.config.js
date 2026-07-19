@@ -18,6 +18,7 @@ export default defineConfig({
 		__BUILD_ID__: JSON.stringify(buildId),
 	},
 	root: 'src',
+	envDir: '..',
 	publicDir: '../public',
 	base: '/',
 	build: {

@@ -121,7 +121,7 @@ export const BlogIndexPage = ({ posts = blogPosts }) => {
 							whileInView={{ opacity: 1, y: 0 }}
 							viewport={{ once: true }}
 							transition={{ delay: index * 0.08 }}
-							className="group flex h-full flex-col overflow-hidden rounded-[1.8rem] border border-white/10 bg-white/5 backdrop-blur-xl transition-transform duration-300 hover:-translate-y-1 hover:border-primary/30"
+							style={{ '--hover-color': '#8b5cf6' }} className="group flex h-full flex-col overflow-hidden rounded-[1.8rem] border border-white/10 bg-white/5 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover-glow"
 						>
 							<div className="flex-1 p-6">
 								<div className="flex items-center gap-3 text-xs uppercase tracking-[0.25em] text-primary">
@@ -284,7 +284,7 @@ export const BlogPostPage = ({ post, posts = blogPosts }) => {
 								<a
 									key={relatedPost.slug}
 									href={relatedPost.path}
-									className="rounded-2xl border border-white/10 bg-white/5 p-4 transition-colors hover:border-primary/30 hover:bg-white/10"
+									style={{ '--hover-color': '#ec4899' }} className="rounded-2xl border border-white/10 bg-white/5 p-4 transition-all hover-glow hover:bg-white/10"
 								>
 									<p className="text-sm text-primary">{relatedPost.category}</p>
 									<h3 className="mt-2 font-semibold text-white">

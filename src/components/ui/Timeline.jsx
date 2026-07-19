@@ -5,7 +5,7 @@ const TimelineItem = ({ data, index }) => (
 	<motion.div
 		initial={{ opacity: 0, y: 50, x: index % 2 === 0 ? -50 : 50 }}
 		whileInView={{ opacity: 1, y: 0, x: 0 }}
-		viewport={{ once: true }}
+		viewport={{ once: false, margin: '-50px' }}
 		transition={{ duration: 0.6, delay: index * 0.1 }}
 		className={`relative flex items-center justify-between mb-12 w-full ${index % 2 === 0 ? 'flex-row-reverse' : 'flex-row'
 			}`}
@@ -20,7 +20,7 @@ const TimelineItem = ({ data, index }) => (
 			)}
 		</div>
 
-		<div className="order-1 glass-panel border border-white/10 rounded-2xl shadow-xl w-full md:w-5/12 px-6 py-6 hover:border-primary/30 transition-colors group liquid-glass">
+		<div style={{ '--hover-color': '#f59e0b' }} className="order-1 glass-panel border border-white/10 rounded-2xl shadow-xl w-full md:w-5/12 px-6 py-6 transition-all group liquid-glass">
 			<div className="flex items-center gap-2 mb-2 text-primary text-sm font-mono">
 				<Calendar size={14} />
 				<span>{data.period}</span>
