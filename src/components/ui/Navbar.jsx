@@ -17,7 +17,7 @@ const Navbar = () => {
 		{ name: 'Experience', href: '#experience' },
 		{ name: 'Skills', href: '#skills' },
 		{ name: 'Projects', href: '#projects' },
-		{ name: 'Blog', href: '/blog/' },
+		{ name: "Kishor's Blog", href: '/blog/' },
 	];
 
 	return (
@@ -66,7 +66,7 @@ const Navbar = () => {
 							rel="noopener noreferrer"
 							whileHover={{ scale: 1.05 }}
 							whileTap={{ scale: 0.95 }}
-							style={{ '--hover-color': '#8b5cf6' }} className="p-2.5 bg-white/5 rounded-full border border-white/10 transition-all text-primary liquid-glass flex items-center gap-2 hover-glow"
+							style={{ '--hover-color': '#7c3aed' }} className="p-2.5 bg-white/5 rounded-full border border-white/10 transition-all text-primary liquid-glass flex items-center gap-2 hover-glow"
 						>
 							<Download size={18} />
 							<span className="text-sm font-semibold">Resume</span>
@@ -76,7 +76,7 @@ const Navbar = () => {
 							href="#contact"
 							whileHover={{ scale: 1.05 }}
 							whileTap={{ scale: 0.95 }}
-							style={{ '--hover-color': '#f97316', fontFamily: 'Outfit, Inter, system-ui, sans-serif' }} className="px-6 py-2.5 bg-primary text-white font-bold rounded-full text-sm flex items-center gap-2 group shadow-lg shadow-primary/20 liquid-glass hover-glow"
+							style={{ '--hover-color': '#ea580c', fontFamily: 'Outfit, Inter, system-ui, sans-serif' }} className="px-6 py-2.5 bg-primary text-white font-bold rounded-full text-sm flex items-center gap-2 group shadow-lg shadow-primary/20 liquid-glass hover-glow"
 						>
 							Let's Talk
 							<ArrowRight
@@ -89,7 +89,7 @@ const Navbar = () => {
 
 				{/* Mobile Toggle */}
 				<button
-					style={{ '--hover-color': '#06b6d4' }} className="lg:hidden p-2 text-gray-300 hover:text-white transition-all rounded-lg liquid-glass hover-glow"
+					style={{ '--hover-color': '#0d9488' }} className="lg:hidden p-2 text-gray-300 hover:text-white transition-all rounded-lg liquid-glass hover-glow"
 					onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
 					aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
 					aria-expanded={mobileMenuOpen}
@@ -141,7 +141,7 @@ const Navbar = () => {
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ delay: 0.6 }}
-							style={{ '--hover-color': '#22c55e', fontFamily: 'Outfit, Inter, system-ui, sans-serif' }} className="mt-4 px-10 py-4 bg-primary text-dark font-bold rounded-full text-xl liquid-glass flex items-center gap-3 hover-glow"
+							style={{ '--hover-color': '#16a34a', fontFamily: 'Outfit, Inter, system-ui, sans-serif' }} className="mt-4 px-10 py-4 bg-primary text-dark font-bold rounded-full text-xl liquid-glass flex items-center gap-3 hover-glow"
 						>
 							<Download size={20} />
 							Download CV

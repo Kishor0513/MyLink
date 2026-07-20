@@ -9,6 +9,7 @@ export const blogPosts = [
 			'A practical checklist for making a React portfolio easier for Google to crawl, understand, and trust.',
 		excerpt:
 			'The fastest SEO wins come from clear titles, crawlable URLs, and content that gives search engines enough context.',
+		hoverColor: '#c2410c',
 		category: 'SEO',
 		readingTime: '6 min read',
 		publishedAt: '2026-05-24',
@@ -62,6 +63,7 @@ export const blogPosts = [
 			'A short guide to keeping sitemap.xml and robots.txt useful on a small portfolio or blog.',
 		excerpt:
 			'Even a small site benefits from a clean sitemap because it gives crawlers a direct map of the pages that matter most.',
+		hoverColor: '#0ea5e9',
 		category: 'Indexing',
 		readingTime: '5 min read',
 		publishedAt: '2026-05-24',
@@ -115,6 +117,7 @@ export const blogPosts = [
 			'A practical performance checklist for keeping a visual portfolio fast enough for users and search engines.',
 		excerpt:
 			'Speed influences both user experience and search visibility, so a portfolio should load like a lightweight landing page, not a demo app.',
+		hoverColor: '#10b981',
 		category: 'Performance',
 		readingTime: '7 min read',
 		publishedAt: '2026-05-24',

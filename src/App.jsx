@@ -10,15 +10,18 @@ import {
 	Github,
 	Globe,
 	Instagram,
+	Link,
 	Linkedin,
 	Mail,
+	MapPin,
 	Server,
 } from 'lucide-react';
 import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { BlogIndexPage, BlogPostPage } from './components/blog/BlogPages';
 import ErrorBoundary from './components/ui/ErrorBoundary';
 import Navbar from './components/ui/Navbar';
-import { blogPosts } from './data/blogPosts';
+import Admin from './components/admin/Admin';
+import { getBlogPosts } from './data/blogStorage';
 const FloatingTechIcons = lazy(() => import('./components/ui/FloatingTechIcons'));
 const SpaceBackground = lazy(() => import('./components/ui/SpaceBackground'));
 const Timeline = lazy(() => import('./components/ui/Timeline'));
@@ -131,6 +134,10 @@ function App() {
 	if (pathname.startsWith('/blog/')) {
 		const slug = pathname.split('/').filter(Boolean)[1];
 		return <BlogPostPage post={{ slug }} />;
+	}
+
+	if (pathname === '/admin') {
+		return <Admin />;
 	}
 
 	// Animation variants
@@ -344,7 +351,7 @@ function App() {
 														whileInView={{ width: `${skill.level}%` }}
 														viewport={{ once: false, margin: '-50px' }}
 														transition={{ duration: 1, delay: 0.2, ease: 'easeOut' }}
-														className="h-full rounded-full bg-gradient-to-r from-primary to-secondary"
+														className="h-full rounded-full bg-gradient-to-r from-blue-400 to-blue-600"
 													/>
 												</div>
 											</motion.div>
@@ -434,7 +441,7 @@ function App() {
 														whileInView={{ width: `${skill.level}%` }}
 														viewport={{ once: false, margin: '-50px' }}
 														transition={{ duration: 1, delay: 0.2, ease: 'easeOut' }}
-														className="h-full rounded-full bg-gradient-to-r from-purple-400 to-pink-500"
+														className="h-full rounded-full bg-gradient-to-r from-purple-400 to-purple-600"
 													/>
 												</div>
 											</motion.div>
@@ -495,7 +502,7 @@ function App() {
 										tags: ['React', 'Node.js', 'Socket.io'],
 										image: '/assets/social_media.svg',
 										className: 'md:col-span-1',
-										hoverColor: '#06b6d4',
+										hoverColor: '#22d3ee',
 									},
 									{
 										title: 'Weavers',
@@ -505,7 +512,7 @@ function App() {
 										tags: ['PHP', 'MySQL', 'Ecommerce'],
 										image: '/assets/ecommerce.svg',
 										className: 'md:col-span-1',
-										hoverColor: '#22c55e',
+										hoverColor: '#15803d',
 									},
 									{
 										title: 'Dahlia Classification (FYP)',
@@ -640,7 +647,7 @@ function App() {
 								}}
 								className="grid md:grid-cols-3 gap-6"
 							>
-								{blogPosts.map((post) => (
+								{getBlogPosts().map((post) => (
 									<motion.a
 										key={post.slug}
 										href={post.path}
@@ -649,7 +656,7 @@ function App() {
 											hidden: { opacity: 0, y: 20 },
 											visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 										}}
-										style={{ '--hover-color': '#f97316' }} className="group rounded-[1.75rem] border border-white/10 bg-white/5 p-6 backdrop-blur-xl transition-all hover-glow"
+										style={{ '--hover-color': post.hoverColor }} className="group rounded-[1.75rem] border border-white/10 bg-white/5 p-6 backdrop-blur-xl transition-all hover-glow"
 									>
 										<div className="flex items-center justify-between gap-4 text-xs uppercase tracking-[0.25em] text-primary">
 											<span>{post.category}</span>
@@ -710,16 +717,16 @@ function App() {
 									<div className="space-y-4">
 										<a
 											href="mailto:kishoc2000@gmail.com"
-											style={{ '--hover-color': '#f43f5e' }} className="flex items-center gap-4 text-gray-300 hover:text-primary transition-all group hover-glow rounded-xl"
+											className="flex items-center gap-4 text-gray-300 hover:text-primary transition-all group rounded-xl"
 										>
-											<div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-primary/30 transition-colors">
+											<div style={{ '--hover-color': '#f43f5e' }} className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-primary/30 transition-colors hover-glow">
 												<Mail size={20} />
 											</div>
 											<span>kishorc2000@gmail.com</span>
 										</a>
 										<div className="flex items-center gap-4 text-gray-300">
-											<div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
-												<Globe size={20} />
+											<div style={{ '--hover-color': '#14b8a6' }} className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover-glow">
+												<MapPin size={20} />
 											</div>
 											<span>Kathmandu, Nepal</span>
 										</div>
@@ -732,21 +739,25 @@ function App() {
 												href: 'https://github.com/Kishor0513',
 												icon: Github,
 												label: 'GitHub',
+												hoverColor: '#6e40c9',
 											},
 											{
 												href: 'https://www.linkedin.com/in/kishor-chaudhary-772b05314/',
 												icon: Linkedin,
 												label: 'LinkedIn',
+												hoverColor: '#0077b5',
 											},
 											{
 												href: 'https://www.instagram.com/kishor0513/',
 												icon: Instagram,
 												label: 'Instagram',
+												hoverColor: '#db2777',
 											},
 											{
-												href: 'https://www.kishorchaudhary.com.np',
-												icon: Globe,
-												label: 'Website',
+												href: 'https://linktr.ee/kishor0513',
+												icon: Link,
+												label: 'Linktree',
+												hoverColor: '#b45309',
 											},
 										].map((social) => (
 											<motion.a
@@ -755,6 +766,7 @@ function App() {
 												target="_blank"
 												rel="noopener noreferrer"
 												whileHover={{ scale: 1.1, y: -2 }}
+												style={{ '--hover-color': social.hoverColor }}
 												className="w-12 h-12 flex items-center justify-center glass-panel rounded-xl border border-white/10 text-gray-400 hover:text-primary transition-all"
 												title={social.label}
 											>
@@ -773,7 +785,7 @@ function App() {
 									className="relative group"
 								>
 									<div className="absolute -inset-1 bg-gradient-to-r from-primary/30 to-secondary/30 rounded-2xl blur opacity-30 group-hover:opacity-50 transition duration-500" />
-									<div className="relative p-6 md:p-8 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
+									<div style={{ '--hover-color': '#c084fc' }} className="relative p-6 md:p-8 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md hover-glow">
 										<h3 className="text-xl font-bold text-white mb-6">
 											Send a Message
 										</h3>

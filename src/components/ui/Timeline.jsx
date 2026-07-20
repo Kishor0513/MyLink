@@ -20,7 +20,7 @@ const TimelineItem = ({ data, index }) => (
 			)}
 		</div>
 
-		<div style={{ '--hover-color': '#f59e0b' }} className="order-1 glass-panel border border-white/10 rounded-2xl shadow-xl w-full md:w-5/12 px-6 py-6 transition-all group liquid-glass">
+		<div style={{ '--hover-color': data.hoverColor }} className="order-1 glass-panel border border-white/10 rounded-2xl shadow-xl w-full md:w-5/12 px-6 py-6 transition-all group liquid-glass">
 			<div className="flex items-center gap-2 mb-2 text-primary text-sm font-mono">
 				<Calendar size={14} />
 				<span>{data.period}</span>
@@ -45,6 +45,7 @@ const Timeline = () => {
 			title: 'E-commerce Web Executive',
 			company: 'Felt and Yarn Pvt. Ltd',
 			period: '2025 - Present',
+			hoverColor: '#d97706',
 			description:
 				'Managing and developing e-commerce web solutions, implementing modern web technologies for enhanced user experience and business growth.',
 		},
@@ -53,6 +54,7 @@ const Timeline = () => {
 			title: 'Bachelor of Information Technology (HONS)',
 			company: 'Nilai University, Malaysia',
 			period: '2022 - 2026',
+			hoverColor: '#0891b2',
 			description:
 				'Specialized in software development, web technologies, and modern programming practices. Developed strong foundation in computer science fundamentals.',
 		},

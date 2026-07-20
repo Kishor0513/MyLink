@@ -2,10 +2,9 @@ import { motion } from 'framer-motion';
 import { ArrowLeft, Calendar, Clock, Tag } from 'lucide-react';
 import {
 	blogIndexPath,
-	blogPosts,
 	buildBlogArticleJsonLd,
-	getBlogPostBySlug,
 } from '../../data/blogPosts';
+import { getBlogPosts, getPostBySlug } from '../../data/blogStorage';
 import { buildAbsoluteUrl, SITE_NAME } from '../../data/site';
 import SeoHead from '../ui/SeoHead';
 
@@ -21,14 +20,23 @@ const formatDate = (value) =>
 		year: 'numeric',
 	}).format(new Date(value));
 
+const renderText = (text) => {
+	if (!text) return text;
+	const html = text
+		.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+		.replace(/\*(.+?)\*/g, '<em>$1</em>')
+		.replace(/`(.+?)`/g, '<code class="text-primary bg-primary/10 px-1 rounded text-xs">$1</code>');
+	return html;
+};
+
 const BlogHeader = () => (
 	<header className="sticky top-0 z-30 border-b border-white/10 bg-[#0f0518]/85 backdrop-blur-xl">
 		<div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
 			<a
-				href="/"
+				href={blogIndexPath}
 				className="text-xl font-bold tracking-tight text-white"
 			>
-				Kishor<span className="text-primary">.dev</span>
+				Kishor's<span className="text-primary"> Blog</span>
 			</a>
 			<nav className="flex items-center gap-4 text-sm text-gray-300">
 				<a
@@ -58,7 +66,7 @@ const BlogShell = ({ children }) => (
 	</div>
 );
 
-export const BlogIndexPage = ({ posts = blogPosts }) => {
+export const BlogIndexPage = ({ posts = getBlogPosts() }) => {
 	const postsToRender = posts;
 	const title = `${SITE_NAME} Blog | SEO, React, and Portfolio Notes`;
 	const description =
@@ -113,6 +121,13 @@ export const BlogIndexPage = ({ posts = blogPosts }) => {
 					</div>
 				</motion.section>
 
+				<div className="flex items-center justify-between mb-8">
+					<p className="text-sm text-gray-500">
+						<span className="text-primary font-semibold">{postsToRender.length}</span>{' '}
+						{postsToRender.length === 1 ? 'article' : 'articles'}
+					</p>
+				</div>
+
 				<section className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
 					{postsToRender.map((post, index) => (
 						<motion.article
@@ -121,7 +136,7 @@ export const BlogIndexPage = ({ posts = blogPosts }) => {
 							whileInView={{ opacity: 1, y: 0 }}
 							viewport={{ once: true }}
 							transition={{ delay: index * 0.08 }}
-							style={{ '--hover-color': '#8b5cf6' }} className="group flex h-full flex-col overflow-hidden rounded-[1.8rem] border border-white/10 bg-white/5 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover-glow"
+							style={{ '--hover-color': post.hoverColor }} className="group flex h-full flex-col overflow-hidden rounded-[1.8rem] border border-white/10 bg-white/5 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover-glow"
 						>
 							<div className="flex-1 p-6">
 								<div className="flex items-center gap-3 text-xs uppercase tracking-[0.25em] text-primary">
@@ -175,8 +190,8 @@ export const BlogIndexPage = ({ posts = blogPosts }) => {
 	);
 };
 
-export const BlogPostPage = ({ post, posts = blogPosts }) => {
-	const currentPost = post?.slug ? getBlogPostBySlug(post.slug) : post;
+export const BlogPostPage = ({ post, posts = getBlogPosts() }) => {
+	const currentPost = post?.slug ? getPostBySlug(post.slug) : post;
 	const allPosts = posts;
 
 	if (!currentPost) {
@@ -226,6 +241,16 @@ export const BlogPostPage = ({ post, posts = blogPosts }) => {
 				]}
 			/>
 			<main className="mx-auto max-w-4xl px-6 py-14 lg:py-20">
+				<motion.a
+					href={blogIndexPath}
+					initial={{ opacity: 0, x: -10 }}
+					animate={{ opacity: 1, x: 0 }}
+					className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-primary transition-colors mb-8 group"
+				>
+					<ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+					Back to Blog
+				</motion.a>
+
 				<motion.article
 					initial="hidden"
 					animate="visible"
@@ -262,12 +287,12 @@ export const BlogPostPage = ({ post, posts = blogPosts }) => {
 							<section key={section.heading}>
 								<h2>{section.heading}</h2>
 								{section.paragraphs.map((paragraph) => (
-									<p key={paragraph}>{paragraph}</p>
+									<p key={paragraph} dangerouslySetInnerHTML={{ __html: renderText(paragraph) }} />
 								))}
 								{section.bullets?.length > 0 && (
 									<ul>
 										{section.bullets.map((bullet) => (
-											<li key={bullet}>{bullet}</li>
+											<li key={bullet} dangerouslySetInnerHTML={{ __html: renderText(bullet) }} />
 										))}
 									</ul>
 								)}
@@ -284,7 +309,7 @@ export const BlogPostPage = ({ post, posts = blogPosts }) => {
 								<a
 									key={relatedPost.slug}
 									href={relatedPost.path}
-									style={{ '--hover-color': '#ec4899' }} className="rounded-2xl border border-white/10 bg-white/5 p-4 transition-all hover-glow hover:bg-white/10"
+									style={{ '--hover-color': relatedPost.hoverColor }} className="rounded-2xl border border-white/10 bg-white/5 p-4 transition-all hover-glow hover:bg-white/10"
 								>
 									<p className="text-sm text-primary">{relatedPost.category}</p>
 									<h3 className="mt-2 font-semibold text-white">
@@ -294,6 +319,17 @@ export const BlogPostPage = ({ post, posts = blogPosts }) => {
 							))}
 						</div>
 					</div>
+
+					<motion.a
+						href={blogIndexPath}
+						initial={{ opacity: 0 }}
+						whileInView={{ opacity: 1 }}
+						viewport={{ once: true }}
+						className="mt-10 inline-flex items-center gap-2 text-sm text-gray-400 hover:text-primary transition-colors group"
+					>
+						<ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+						Back to all articles
+					</motion.a>
 				</motion.article>
 			</main>
 		</BlogShell>
