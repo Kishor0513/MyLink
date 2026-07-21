@@ -198,9 +198,9 @@ function App() {
 										className="font-black tracking-wide mb-4 leading-[1.1] drop-shadow-lg"
 									>
 										<span className="block text-2xl md:text-3xl text-gray-300 font-light mb-3 tracking-normal">I'm</span>
-										<span className="flex justify-center items-baseline gap-x-4 whitespace-nowrap text-4xl sm:text-5xl md:text-7xl lg:text-8xl">
+										<span className="flex flex-col sm:flex-row justify-center items-center sm:items-baseline gap-y-2 sm:gap-x-4 text-4xl sm:text-5xl md:text-7xl lg:text-8xl">
 											<span className="text-white">Kishor</span>
-											<span className="running-gradient">Chaudhary</span>
+											<span className="running-gradient pb-1">Chaudhary</span>
 										</span>
 									</motion.h1>
 

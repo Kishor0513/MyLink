@@ -15,18 +15,23 @@ function getStoredPosts() {
 
 export function getBlogPosts() {
 	const stored = getStoredPosts();
-	if (stored.length === 0) return staticPosts;
-
-	const merged = [...staticPosts];
-	for (const sp of stored) {
-		const idx = merged.findIndex((p) => p.slug === sp.slug);
-		if (idx !== -1) {
-			merged[idx] = sp;
-		} else {
-			merged.push(sp);
+	let merged;
+	if (stored.length === 0) {
+		merged = [...staticPosts];
+	} else {
+		merged = [...staticPosts];
+		for (const sp of stored) {
+			const idx = merged.findIndex((p) => p.slug === sp.slug);
+			if (idx !== -1) {
+				merged[idx] = sp;
+			} else {
+				merged.push(sp);
+			}
 		}
 	}
-	return merged;
+	return merged.sort(
+		(a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)
+	);
 }
 
 export function saveBlogPosts(posts) {
