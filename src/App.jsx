@@ -266,11 +266,11 @@ function App() {
 							initial={{ opacity: 0, y: 10 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ delay: 1.5, duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
-							style={{ '--hover-color': '#8b5cf6' }} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-2 text-gray-500 cursor-pointer hover-glow transition-all"
+							style={{ '--hover-color': '#8b5cf6' }} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center gap-2 text-gray-500 cursor-pointer hover-glow transition-all"
 							onClick={() =>
 								document
-									.getElementById('timeline-content')
-									?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+									.getElementById('experience')
+									?.scrollIntoView({ behavior: 'smooth' })
 							}
 						>
 							<span className="text-xs uppercase tracking-[0.2em] font-medium">
