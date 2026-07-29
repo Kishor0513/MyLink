@@ -75,7 +75,7 @@ const Timeline = () => {
 					</p>
 				</div>
 
-				<div className="relative wrap overflow-hidden p-10 h-full">
+				<div id="timeline-content" className="relative wrap overflow-hidden p-10 h-full">
 					<div className="absolute border-opacity-20 border-gray-700 h-full border left-1/2 -translate-x-1/2 hidden md:block" />
 					{experiences.map((exp, index) => (
 						<TimelineItem

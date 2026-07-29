@@ -269,7 +269,7 @@ function App() {
 							style={{ '--hover-color': '#8b5cf6' }} className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-gray-500 cursor-pointer hover-glow transition-all"
 							onClick={() =>
 								document
-									.getElementById('experience')
+									.getElementById('timeline-content')
 									?.scrollIntoView({ behavior: 'smooth', block: 'center' })
 							}
 						>
