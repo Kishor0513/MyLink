@@ -270,7 +270,7 @@ function App() {
 							onClick={() =>
 								document
 									.getElementById('experience')
-									?.scrollIntoView({ behavior: 'smooth' })
+									?.scrollIntoView({ behavior: 'smooth', block: 'center' })
 							}
 						>
 							<span className="text-xs uppercase tracking-[0.2em] font-medium">
