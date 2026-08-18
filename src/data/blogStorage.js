@@ -9,7 +9,9 @@ function getStoredPosts() {
 			const parsed = JSON.parse(stored);
 			if (Array.isArray(parsed)) return parsed;
 		}
-	} catch {}
+	} catch {
+		return [];
+	}
 	return [];
 }
 

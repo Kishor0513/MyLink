@@ -8,7 +8,7 @@ export default [
     },
     js.configs.recommended,
     {
-        files: ["**/*.jsx", "**/*.js"],
+        files: ["**/*.jsx", "**/*.js", "**/*.mjs"],
         plugins: {
             react
         },
@@ -23,10 +23,11 @@ export default [
                 }
             }
         },
-        rules: {
-            "react/prop-types": "off",
-            "no-unused-vars": "warn",
-            "no-undef": "warn"
-        }
+rules: {
+			"react/prop-types": "off",
+			"react/jsx-uses-vars": "error",
+			"no-unused-vars": "warn",
+			"no-undef": "warn"
+		}
     }
 ];

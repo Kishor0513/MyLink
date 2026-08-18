@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   SiReact, SiNodedotjs, SiTypescript, SiMongodb, SiPostgresql,
   SiDocker, SiCloudflare, SiGit, SiPython, SiGraphql,

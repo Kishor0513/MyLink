@@ -119,7 +119,6 @@ const Admin = () => {
 };
 
 const Dashboard = ({ posts, onNew, onEdit, onDelete, onLogout }) => {
-	const [exporting, setExporting] = useState(false);
 	const [importing, setImporting] = useState(false);
 	const [importData, setImportData] = useState('');
 

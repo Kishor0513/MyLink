@@ -28,56 +28,6 @@ const Timeline = lazy(() => import('./components/ui/Timeline'));
 
 
 
-const useMediaQuery = (query) => {
-	const [matches, setMatches] = useState(false);
-
-	useEffect(() => {
-		const mediaQuery = window.matchMedia(query);
-		const updateMatches = () => setMatches(mediaQuery.matches);
-
-		updateMatches();
-		mediaQuery.addEventListener('change', updateMatches);
-
-		return () => mediaQuery.removeEventListener('change', updateMatches);
-	}, [query]);
-
-	return matches;
-};
-
-const LazyWhenVisible = ({ children, className = '' }) => {
-	const [isVisible, setIsVisible] = useState(false);
-	const containerRef = useRef(null);
-
-	useEffect(() => {
-		if (isVisible || !containerRef.current) {
-			return;
-		}
-
-		const observer = new IntersectionObserver(
-			([entry]) => {
-				if (entry.isIntersecting) {
-					setIsVisible(true);
-					observer.disconnect();
-				}
-			},
-			{ rootMargin: '700px 0px' },
-		);
-
-		observer.observe(containerRef.current);
-
-		return () => observer.disconnect();
-	}, [isVisible]);
-
-	return (
-		<div
-			ref={containerRef}
-			className={className}
-		>
-			{isVisible ? children : null}
-		</div>
-	);
-};
-
 const HERO_ROLES = [
 	'Full Stack Developer',
 	'React Specialist',
