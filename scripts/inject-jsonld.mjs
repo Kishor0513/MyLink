@@ -47,8 +47,8 @@ async function injectIntoFile(filePath) {
 			'@context': 'https://schema.org',
 			'@type': 'BreadcrumbList',
 			itemListElement: [
-				{ '@type': 'ListItem', position: 1, name: 'Home', item: '/' },
-				{ '@type': 'ListItem', position: 2, name: 'Blog', item: '/blog/' },
+			{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.kishorchaudhary.com.np/' },
+			{ '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://www.kishorchaudhary.com.np/blog/' },
 				{
 					'@type': 'ListItem',
 					position: 3,
